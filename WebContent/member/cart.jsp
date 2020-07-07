@@ -6,7 +6,7 @@
 %>    
 	<script>
 		alert("로그인 해주세요!");
-		location.href="./Board.do?command=login_form";
+		location.href="./Board.do?command=login_form&site=cart";
 	</script>
 <%
 	}

@@ -23,7 +23,8 @@ public class LoginProAction implements Action {
 		 MemberDAO mdao = new MemberDAO();
 		 String url = "";
 		 String id = request.getParameter("userID");
-	  	String pass = request.getParameter("userPassword");
+	    String pass = request.getParameter("userPassword");
+	    String site = request.getParameter("site");
 		System.out.println(id+" "+pass);
 		 LoginProService loginservice = new LoginProService();
 		 int isLoginSuccess = loginservice.loginService(id,pass);
@@ -34,7 +35,14 @@ public class LoginProAction implements Action {
 		     session.setAttribute("loginUser",mvo);
 			 session.setAttribute("id",id);
 			 System.out.println("로그인 성공");
-			 url = "./Board.do?command=index";
+			 if(site.equals("cart")) {
+				 url = "./Board.do?command=cart";
+			 }else if(site.equals("mypage")) {
+				 url = "./Board.do?command=mypage";
+			 }else {
+				 url = "./Board.do?command=index";
+			 }
+			
 		 }else if(isLoginSuccess == 0) {
 			 request.setAttribute("message","비밀번호가 일치하지 않습니다.");
 			 url = "./Board.do?command=login_form";

@@ -19,7 +19,8 @@
   </head>
   <body>
    <%
-   	String message = (String)request.getAttribute("message");
+   		String message = (String)request.getAttribute("message");
+       String site = request.getParameter("site");
    %>
     <div class="container">
 	<jsp:include page="/top.jsp" />
@@ -35,6 +36,7 @@
 										<div class="form-group">
 											<input type="password" class="form-control" placeholder="비밀번호"  name="userPassword" maxlength="20" />
 										</div>
+										<input type="hidden" value="<%=site %>" name="site" />
 										<input type="submit" class="btn btn-primary form-control" value="로그인" /> 
 								</form>
 								<br><br>
@@ -48,9 +50,6 @@
 								
 							</div>
 							
-			<div class="col-lg-4">
-				
-			</div>
 	</div>
  </main>
 	<jsp:include page="/bottom.jsp" />
