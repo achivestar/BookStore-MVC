@@ -1,0 +1,52 @@
+@charset "UTF-8";
+@import url(http://fonts/googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts/googleapis.com/earlyaccess/hanna.css);
+*{
+	font-family: 'Nanum Gothic';
+}
+
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.fnt {
+	font-size: 12px;
+}
+
+.carousel {
+	margin-bottom: 4rem;
+}
+
+.carousel-caption {
+	bottom: 3rem;
+	z-index: 10;
+}
+
+.carousel-item {
+	height: 32rem;
+}
+
+.carousel-item>img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	height: 32rem;
+}
+
+.banner-height {
+	height: 15rem;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+
