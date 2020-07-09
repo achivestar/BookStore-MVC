@@ -127,8 +127,13 @@
 							 </div>
 					</div>
 						<br><br>
+						<div class="form-group btn-group col-md-12 custom-file mb-3">
+						      <input type="file" class="custom-file-input col-form-label-sm" id="customFile" name="profileImg" accept="images/gif, image/jpg, image/jpeg, image/png">
+						      <label class="custom-file-label" for="customFile"><%=mvo.getProfileimg()%></label>
+					   </div>
 			
 					<div class="form-group btn-group col-md-12" >
+					        <input type="hidden" name="customFile" value="<%=mvo.getProfileimg()%>" />
 							<input type="submit" class="btn btn-primary form-control" value="회원수정"  id="submit" /> 
 					</div>
 					<br><br>

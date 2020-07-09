@@ -2,6 +2,7 @@ package com.pe.bluering.action;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.pe.bluering.dao.MemberDAO;
 import com.pe.bluering.service.LoginProService;
+import com.pe.bluering.vo.CouponVO;
 import com.pe.bluering.vo.MemberVO;
 
 public class LoginProAction implements Action {
@@ -21,19 +23,26 @@ public class LoginProAction implements Action {
 		 response.setContentType("text/html;charset=UTF-8");
 		 
 		 MemberDAO mdao = new MemberDAO();
+		 MemberDAO cdao = new MemberDAO();
+		 MemberDAO cdaos = new MemberDAO();
 		 String url = "";
 		 String id = request.getParameter("userID");
-	    String pass = request.getParameter("userPassword");
-	    String site = request.getParameter("site");
-		System.out.println(id+" "+pass);
+	     String pass = request.getParameter("userPassword");
+	     String site = request.getParameter("site");
+		System.out.println(id+" "+pass+" "+site);
 		 LoginProService loginservice = new LoginProService();
 		 int isLoginSuccess = loginservice.loginService(id,pass);
-		 
+		 System.out.println("로그인 여부 :"+isLoginSuccess);
 		 if(isLoginSuccess == 1) {
-			MemberVO mvo = mdao.getMember(id);  //회원인증에 성공했으므로 회원정보를 얻어온다.
+			 MemberVO mvo = mdao.getMember(id);  //회원인증에 성공했으므로 회원정보를 얻어온다.
+			
+			ArrayList<CouponVO> cp = cdaos.getCoupon(id);
+			 int ccount = cdao.getCountCoupon(id);
 			 HttpSession session = request.getSession();
 		     session.setAttribute("loginUser",mvo);
 			 session.setAttribute("id",id);
+			 session.setAttribute("couponList", cp);
+			 session.setAttribute("ccount",ccount);
 			 System.out.println("로그인 성공");
 			 if(site.equals("cart")) {
 				 url = "./Board.do?command=cart";

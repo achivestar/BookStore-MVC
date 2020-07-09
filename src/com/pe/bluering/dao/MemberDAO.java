@@ -6,9 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-
+import com.pe.bluering.vo.CouponVO;
 import com.pe.bluering.vo.MemberVO;
 
 public class MemberDAO {
@@ -39,8 +40,6 @@ public class MemberDAO {
 	public int insertMember(MemberVO memberVo) throws SQLException {
 
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int num = 0;
 		int insertCount = 0;
 		
 		try {
@@ -62,7 +61,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			pstmt.close();
+
 			con.close();
 		}
 		
@@ -87,8 +86,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			pstmt.close();
-			rs.close();
+
 			con.close();
 		}
 
@@ -123,8 +121,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			rs.close();
-			pstmt.close();
+
 			con.close();
 		}
 
@@ -163,8 +160,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			pstmt.close();
-			rs.close();
+
 			con.close();
 		}
 		
@@ -200,4 +196,71 @@ public class MemberDAO {
 		
 		return updateCount;
 	}
+
+	
+	
+	//해당 아이디를 가진 유저의 쿠폰리스트 모두 가져오기
+	public ArrayList<CouponVO> getCoupon(String id) throws SQLException {
+		
+		ArrayList<CouponVO> cvo = new ArrayList<CouponVO>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM hcoupon WHERE useUser =?" ;
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				CouponVO cpon = new CouponVO();
+				cpon.setCnum(rs.getInt("cnum"));
+				cpon.setCname(rs.getString("cname"));
+				cpon.setCype(rs.getString("ctype"));
+				cpon.setCregdate(rs.getString("cregdate"));
+				cpon.setUseUser(rs.getString("useUser"));	
+				cvo.add(cpon);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+
+			con.close();
+		}
+		
+		return cvo;
+	}
+
+	
+	//해당 아이디를 가진 유저의 쿠폰 개수 구하기
+	public int getCountCoupon(String id) throws SQLException {
+		
+		System.out.println("넘어온 값:"+id);
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(*) as count FROM hcoupon WHERE useUser = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt("count");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			con.close();
+		}
+		
+		return count;
+	}
+	
+
 }

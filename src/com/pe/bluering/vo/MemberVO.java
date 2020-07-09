@@ -14,6 +14,7 @@ public class MemberVO {
 	private String useyn;
 	private String profileimg;
 	private int lev;
+	private int point;
 	private String indate;
 	
 	
@@ -93,6 +94,14 @@ public class MemberVO {
 	public void setProfileimg(String profileimg) {
 		this.profileimg = profileimg;
 	}
+
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
 	public String getIndate() {
 		return indate;
 	}

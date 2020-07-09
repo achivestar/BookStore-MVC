@@ -3,6 +3,7 @@ package com.pe.bluering.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -50,8 +51,24 @@ public class memberModifyProAction implements Action {
 		 String phone2 =  multi.getParameter("phone2");
 		 String phone3 =  multi.getParameter("phone3");
 		 
-		
+		 String customFile = multi.getParameter("customFile");
+		// String profileImg = multi.getParameter("profileImg");
+		 Enumeration<String> fileNames = multi.getFileNames();
+		 if(fileNames.hasMoreElements()) {
+			 String fileName = fileNames.nextElement();
+			 String updateFile = multi.getFilesystemName(fileName);
+			 
+			 if(updateFile == null) {
+				 memberVo.setProfileimg(customFile);
+			 }else {
+				 memberVo.setProfileimg(updateFile);
+			 }
+		 }
+		// System.out.println("기존파일 : " + customFile);
+		// System.out.println("새로운 프로필 :"+profileImg);
+
 		 memberVo.setPhone(phone1+"-"+phone2+"-"+phone3);
+		 
 
 		 MemberModProService memberMod = new MemberModProService();
 		 
