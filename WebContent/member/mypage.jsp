@@ -4,34 +4,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
-    //ArrayList<CouponVO> cvo = ( ArrayList<CouponVO>) session.getAttribute("couponList");
-    
-  //  out.println(mvo);
-
-	String id = (String)session.getAttribute("id");
-	//out.println(id);
+   String id = (String)session.getAttribute("id");
+    MemberVO   mvo = null;
+	ArrayList<CouponVO>   cvo = null;
+	int couponCount = 0;
+	String lev = null;
+	String name = null;
+	int point = 0;
+	String profileImg =null;
 	if(id==null){
 %>    
 	<script>
 		location.href="./Board.do?command=login_form&site=mypage";
 	</script>
 <%
+	}else{
+
+			mvo = (MemberVO)session.getAttribute("loginUser");
+			cvo = (ArrayList) session.getAttribute("couponList");
+			couponCount = (int) session.getAttribute("ccount");
+
+	        if(mvo.getLev()==1){
+				 lev = "<span class='badge badge-info'>일반</span>";
+			 }else if(mvo.getLev()==2){
+				 lev = "<span class='badge badge-success'>일반</span>";
+			 }else if(mvo.getLev()==3){
+				 lev = "<span class='badge badge-warning'>일반</span>";
+			 }else{
+				 lev = "<span class='badge badge-dark'>일반</span>";
+			 }
+	         name = mvo.getName();
+	         couponCount = couponCount;
+	         point = mvo.getPoint();
+	         profileImg = mvo.getProfileimg();
 	}
-		 MemberVO mvo = (MemberVO)session.getAttribute("loginUser");
-		 int couponCount = (int) session.getAttribute("ccount");
-		 ArrayList<CouponVO> cvo = (ArrayList) session.getAttribute("couponList");
-		 String lev = null;
-		 if(mvo.getLev()==1){
-			 lev = "<span class='badge badge-info'>일반</span>";
-		 }else if(mvo.getLev()==2){
-			 lev = "<span class='badge badge-success'>일반</span>";
-		 }else if(mvo.getLev()==3){
-			 lev = "<span class='badge badge-warning'>일반</span>";
-		 }else{
-			 lev = "<span class='badge badge-dark'>일반</span>";
-		 }
-		 
+
 %>
 <!DOCTYPE html>
 <html>
@@ -62,27 +69,30 @@
 					<div class="card bg-light">
 							  <div class="card-header">내 정보</div>
 							  <div class="card-body">
-								 <p><span style="font-weight:bold;color:blue"><%=mvo.getName() %></span>님 오늘도 행복한 하루 보내세요.</p>
+								 <p><span style="font-weight:bold;color:blue"><%=name %></span>님 오늘도 행복한 하루 보내세요.</p>
 								 <p class="align-middle">나의등급 <%=lev %> </p>
 								 <div class="row">
 									  <div class="col-xs-6 col-md-3">
-										  <img src="../upload/<%=mvo.getProfileimg() %>" alt="" style="height:160px" class="img-thumbnail">
+										  <img src="../upload/<%=profileImg %>" alt="" style="height:160px" class="img-thumbnail">
 									  </div>
 									  <div class="col-xs-12 col-md-5">
 										<ul class="list-group">
 											  <li href="#" class="list-group-item list-group-item-info">
-												나의 쿠폰  <span class="badge badge-danger"><%=couponCount%></span>개
+												나의 쿠폰  <span class="badge badge-danger"><%=couponCount %></span>개
 											  </li>
-											 <%for(int i=0; i<cvo.size(); i++){ %>
-											  <li class="list-group-item"><%=cvo.get(i).getCname() %></li>
-											<%} %>
+											<%
+											 if(cvo!=null){
+											  for(int i=0; i<cvo.size(); i++){ %>
+												  <li class="list-group-item"><%=cvo.get(i).getCname() %></li>
+											<%} 
+												}%>  
 											</ul>
 									  </div>
 
 									  <div class="col-xs-12 col-md-4">
 										<ul class="list-group">
 											  <li class="list-group-item list-group-item-info">나의 point</li>
-											  <li class="list-group-item text-right"><%=mvo.getPoint() %>원</li>
+											  <li class="list-group-item text-right"><%=point %>원</li>
 
 										</ul>
 									  </div>
