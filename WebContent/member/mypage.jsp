@@ -73,7 +73,7 @@
 								 <p class="align-middle">나의등급 <%=lev %> </p>
 								 <div class="row">
 									  <div class="col-xs-6 col-md-3">
-										  <img src="../upload/<%=profileImg %>" alt="" style="height:160px" class="img-thumbnail">
+										  <img src="/upload/<%=profileImg%>" alt="" style="height:160px" class="img-thumbnail">
 									  </div>
 									  <div class="col-xs-12 col-md-5">
 										<ul class="list-group">
