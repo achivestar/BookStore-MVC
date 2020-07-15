@@ -20,10 +20,10 @@ public class MemberJoinAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		// joinform À¸·Î ºÎÅÍ ÀĞ¾î¿Â È¸¿øÀÇ Á¤º¸µéÀ» vo °´Ã¼¿¡ ÀúÀåÇÏ°í
-		//service Å¬·¡½º¸¦ µû·Î ¸¸µé¾î¼­ vo °´Ã¼¸¦ Àü´ŞÇÑ ÈÄ
-		// service °´Ã¼¿¡¼­´Â dao °´Ã¼¿¡°Ô sql ½ÇÇàÀ» ÇÏ°Ô ÇÏ¿© °á°ú °ªÀ» ¹İÈ¯ ¹Ş°í
-		// ±× ¹İÈ¯µÈ °á°ú°ªÀ» ´Ù½Ã action °´Ã¼·Î Àü´ŞÇØ¼­ ¼º°ø ¿©ºÎ¸¦ ÇÁ¸°Æ® ÇÑ´Ù.
+		// joinform ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ¾ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ vo ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½
+		//service Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¼­ vo ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+		// service ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ dao ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ sql ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Ş°ï¿½
+		// ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ action ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ´ï¿½.
 		
 		 request.setCharacterEncoding("utf-8");
 		 response.setContentType("text/html;charset=UTF-8");
@@ -71,16 +71,16 @@ public class MemberJoinAction implements Action {
 			 response.setContentType("text/html;charset=UTF-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
-			 out.println("alert('°¡ÀÔ½ÇÆĞ');");
-			 out.println("location.href='./Board.do?command=join_form'");
+			 out.println("alert('íšŒì›ê°€ì…ì‹¤íŒ¨');");
+			 out.println("location.href='./Controller.do?command=join_form'");
 			 out.println("</script>");
 
 		}else {
 			 response.setContentType("text/html;charset=UTF-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
-			 out.println("alert('°¡ÀÔ¼º°ø');");
-			 out.println("location.href='./Board.do?command=login_form'");
+			 out.println("alert('íšŒì›ê°€ì…ì„±ê³µ');");
+			 out.println("location.href='./Controller.do?command=login_form'");
 			 out.println("</script>");
 
 			// RequestDispatcher dispatcher = request.getRequestDispatcher("./Board.do?command=login_form");

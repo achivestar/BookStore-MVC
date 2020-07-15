@@ -17,7 +17,7 @@ import com.pe.bluering.action.ActionFactory;
  * Servlet implementation class BoardFrontController
  */
 
-@WebServlet("/portfolio2/Board.do")
+@WebServlet("/portfolio2/Controller.do")
 public class BoardFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

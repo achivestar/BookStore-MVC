@@ -25,7 +25,7 @@
 		</div>
 		<div class="col-lg-12">
 			<div class="jumbotron col-md-8" style="padding-top:20px;width:100%;margin:0 auto ">
-				<form method="post"  action="./Board.do?command=memberJoinAction" enctype="multipart/form-data" name="joinForm"  id="joinForm" onsubmit="return checkForm()">
+				<form method="post"  action="./Controller.do?command=memberJoinAction" enctype="multipart/form-data" name="joinForm"  id="joinForm" onsubmit="return checkForm()">
 	
 							<div class=" form-group btn-group col-md-12"  >
 								 <div class="input-group mb-2">

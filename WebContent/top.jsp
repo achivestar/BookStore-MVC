@@ -8,18 +8,18 @@
 		<%
         	if(id == null){
         %>
-		<a class="btn btn-sm fnt" href="./Board.do?command=login_form">로그인</a> <a
-			class="btn btn-sm fnt"  href="./Board.do?command=contract">회원가입</a>
+		<a class="btn btn-sm fnt" href="./Controller.do?command=login_form">로그인</a> <a
+			class="btn btn-sm fnt"  href="./Controller.do?command=contract">회원가입</a>
 		<%
         	}else{
 		%>
-		<a class="btn btn-sm fnt" href="./Board.do?command=logout">로그아웃</a>
-		<a class="btn btn-sm fnt" href="./Board.do?command=memberModify">회원수정</a>
+		<a class="btn btn-sm fnt" href="./Controller.do?command=logout">로그아웃</a>
+		<a class="btn btn-sm fnt" href="./Controller.do?command=memberModify">회원수정</a>
 		<%
         	}
 		%>
-		<a class="btn btn-sm fnt" href="./Board.do?command=mypage">마이페이지</a> 
-		<a class="btn btn-sm fnt"	href="./Board.do?command=cart">장바구니</a>
+		<a class="btn btn-sm fnt" href="./Controller.do?command=mypage">마이페이지</a> 
+		<a class="btn btn-sm fnt"	href="./Controller.do?command=cart">장바구니</a>
 	</div>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
 		<a class="navbar-brand" href="#">브랜드로고</a>

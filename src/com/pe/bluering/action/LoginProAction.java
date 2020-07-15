@@ -32,9 +32,9 @@ public class LoginProAction implements Action {
 		System.out.println(id+" "+pass+" "+site);
 		 LoginProService loginservice = new LoginProService();
 		 int isLoginSuccess = loginservice.loginService(id,pass);
-		 System.out.println("·Î±×ÀÎ ¿©ºÎ :"+isLoginSuccess);
+		 System.out.println("ë¡œê·¸ì¸ ì—¬ë¶€ :"+isLoginSuccess);
 		 if(isLoginSuccess == 1) {
-			 MemberVO mvo = mdao.getMember(id);  //È¸¿øÀÎÁõ¿¡ ¼º°øÇßÀ¸¹Ç·Î È¸¿øÁ¤º¸¸¦ ¾ò¾î¿Â´Ù.
+			 MemberVO mvo = mdao.getMember(id);  //íšŒì›ì¸ì¦ì— ì„±ê³µí–ˆìœ¼ë¯€ë¡œ íšŒì›ì •ë³´ë¥¼ ì–»ì–´ì˜¨ë‹¤.
 			
 			ArrayList<CouponVO> cp = cdaos.getCoupon(id);
 			 int ccount = cdao.getCountCoupon(id);
@@ -43,22 +43,22 @@ public class LoginProAction implements Action {
 			 session.setAttribute("id",id);
 			 session.setAttribute("couponList", cp);
 			 session.setAttribute("ccount",ccount);
-			 System.out.println("·Î±×ÀÎ ¼º°ø");
+			 System.out.println("ë¡œê·¸ì¸ ì„±ê³µ");
 			 if(site.equals("cart")) {
-				 url = "./Board.do?command=cart";
+				 url = "./Controller.do?command=cart";
 			 }else if(site.equals("mypage")) {
-				 url = "./Board.do?command=mypage";
+				 url = "./Controller.do?command=mypage";
 			 }else {
-				 url = "./Board.do?command=index";
+				 url = "./Controller.do?command=index";
 			 }
 			
 		 }else if(isLoginSuccess == 0) {
-			 request.setAttribute("message","ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
-			 url = "./Board.do?command=login_form";
+			 request.setAttribute("message","ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+			 url = "./Controller.do?command=login_form";
 			 
 		 }else {
-			 request.setAttribute("message","Á¸ÀçÇÏÁö ¾Ê´Â È¸¿øÀÔ´Ï´Ù.");
-			 url = "./Board.do?command=login_form";
+			 request.setAttribute("message","ì¡´ì¬í•˜ì§€ ì•ŠëŠ” íšŒì›ì…ë‹ˆë‹¤.");
+			 url = "./Controller.do?command=login_form";
 		 }
 		 
 		 RequestDispatcher dispatcher = request.getRequestDispatcher(url);

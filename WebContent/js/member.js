@@ -11,7 +11,7 @@ function idCheck(){
 	var id = $("#userID").val().trim();
 	//alert(id);
 	$.ajax({
-			url : "./Board.do?command=idCheck",
+			url : "./Controller.do?command=idCheck",
 			type : "GET",
 			data : {"id":id},
 			success : function(res){

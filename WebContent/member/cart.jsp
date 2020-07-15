@@ -5,7 +5,7 @@
 	if(id==null){
 %>    
 	<script>
-		location.href="./Board.do?command=login_form&site=cart";
+		location.href="./Controller.do?command=login_form&site=cart";
 	</script>
 <%
 	}

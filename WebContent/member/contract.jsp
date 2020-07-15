@@ -20,7 +20,7 @@
 			<div>
 				<h2>회원가입</h2>
 				<div class="jumbotron col-md-8" style="padding-top:20px;width:100%;margin:0 auto ">
-							<form id="join" action="./Board.do?command=join_form" method="post"name="formm">
+							<form id="join" action="./Controller.do?command=join_form" method="post"name="formm">
 								언제나 새로운 즐거움이 가득한 Bluering 의 회원가입 페이지 입니다. 
 								<br> Bluering 의 회원가입은 무료이며, 회원님의 개인신상에 관한 정보는 ‘정보통신망이용촉진 및 정보보호등에관한법률’에 의해 회원님의
 								동의없이 제 3자에게 제공되지 않으며, 철저히 보호되고 있사오니 안심하고 이용하시기 바랍 니다.<br><br>

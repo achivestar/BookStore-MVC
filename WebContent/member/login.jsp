@@ -29,7 +29,7 @@
  			 <h2>로그인</h2>    
 				<div class="col-lg-4"></div>
 							<div class="jumbotron text-center" style="padding-top:20px;">
-								<form method="post" action="./Board.do?command=login_action"  name="loginForm" >
+								<form method="post" action="./Controller.do?command=login_action"  name="loginForm" >
 										<div class="form-group">
 											<input type="text" class="form-control" placeholder="아이디"  name="userID" maxlength="20" />
 										</div>

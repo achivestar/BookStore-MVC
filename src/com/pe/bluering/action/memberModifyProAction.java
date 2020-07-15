@@ -64,8 +64,7 @@ public class memberModifyProAction implements Action {
 				 memberVo.setProfileimg(updateFile);
 			 }
 		 }
-		// System.out.println("±âÁ¸ÆÄÀÏ : " + customFile);
-		// System.out.println("»õ·Î¿î ÇÁ·ÎÇÊ :"+profileImg);
+
 
 		 memberVo.setPhone(phone1+"-"+phone2+"-"+phone3);
 		 
@@ -78,16 +77,16 @@ public class memberModifyProAction implements Action {
 			 response.setContentType("text/html;charset=UTF-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
-			 out.println("alert('¼öÁ¤½ÇÆÐ');");
-			 out.println("location.href='./Board.do?command=index'");
+			 out.println("alert('ìˆ˜ì •ì‹¤íŒ¨');");
+			 out.println("location.href='./Controller.do?command=index'");
 			 out.println("</script>");
 
 		}else {
 			 response.setContentType("text/html;charset=UTF-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
-			 out.println("alert('¼öÁ¤¼º°ø');");
-			 out.println("location.href='./Board.do?command=index'");
+			 out.println("alert('ìˆ˜ì •ì„±ê³µ');");
+			 out.println("location.href='./Controller.do?command=index'");
 			 out.println("</script>");
 
 			// RequestDispatcher dispatcher = request.getRequestDispatcher("./Board.do?command=login_form");

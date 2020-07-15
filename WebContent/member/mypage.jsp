@@ -15,7 +15,7 @@
 	if(id==null){
 %>    
 	<script>
-		location.href="./Board.do?command=login_form&site=mypage";
+		location.href="./Controller.do?command=login_form&site=mypage";
 	</script>
 <%
 	}else{

@@ -28,7 +28,7 @@ public class MemberModify implements Action {
 		
 		request.setAttribute("mvo", mvo);
 	
-		RequestDispatcher dispatcher = request.getRequestDispatcher("./Board.do?command=memberModifyForm");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("./Controller.do?command=memberModifyForm");
 		dispatcher.forward(request, response);
 		
 	}
