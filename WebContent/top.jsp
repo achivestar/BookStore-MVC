@@ -5,14 +5,15 @@
 %>
 <header class="blog-header py-3">
 	<div class="py-2 text-right">
+
 		<%
-        	if(id == null){
-        %>
+        	if(id == null){%>
 		<a class="btn btn-sm fnt" href="./Controller.do?command=login_form">로그인</a> <a
 			class="btn btn-sm fnt"  href="./Controller.do?command=contract">회원가입</a>
 		<%
         	}else{
 		%>
+		
 		<a class="btn btn-sm fnt" href="./Controller.do?command=logout">로그아웃</a>
 		<a class="btn btn-sm fnt" href="./Controller.do?command=memberModify">회원수정</a>
 		<%
@@ -20,9 +21,15 @@
 		%>
 		<a class="btn btn-sm fnt" href="./Controller.do?command=mypage">마이페이지</a> 
 		<a class="btn btn-sm fnt"	href="./Controller.do?command=cart">장바구니</a>
+		<%
+        	if(id!=null&&id.equals("admin")){%>
+		<a class="btn btn-sm fnt btn-outline-info"  role="button"  href="./admin/AdminController.do?command=index" >관리자</a> 
+		<%
+        	}
+		%>
 	</div>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-		<a class="navbar-brand" href="#">브랜드로고</a>
+		<a class="navbar-brand" href="./Controller.do?command=index">브랜드로고</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbars" aria-controls="navbars" aria-expanded="false"
 			aria-label="Toggle navigation">

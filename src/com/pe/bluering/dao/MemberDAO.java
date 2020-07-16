@@ -21,7 +21,7 @@ public class MemberDAO {
 
 			InputStream is = getClass().getResourceAsStream("jdbc.properties");
 		    Properties prop = new Properties();
-		    //ÆÄÀÏ InputStreamÀ» Properties °´Ã¼·Î ÀĞ¾î¿Â´Ù
+		    //íŒŒì¼ InputStreamì„ Properties ê°ì²´ë¡œ ì½ì–´ì˜¨ë‹¤
 		    prop.load(is);
 			String driver = prop.getProperty("driver");
 			String url = prop.getProperty("url");
@@ -108,12 +108,12 @@ public class MemberDAO {
 			
 			if(rs.next()) {
 				if(rs.getString("pwd") != null && rs.getString("pwd").equals(pass)) {
-					result = 1;  // ¾ÏÈ£¿Í ºñ¹Ğ¹øÈ£°¡ ¸ğµÎ ÀÏÄ¡ÇÑ´Ù.
+					result = 1;  // ì•”í˜¸ì™€ ë¹„ë°€ë²ˆí˜¸ê°€ ëª¨ë‘ ì¼ì¹˜í•œë‹¤.
 				}else {
-					result = 0; //¾ÆÀÌµğ´Â ÀÏÄ¡ÇÏÁö¸¸ ºñ¹øÀÌ ºÒÀÏÄ¡
+					result = 0; //ì•„ì´ë””ëŠ” ì¼ì¹˜í•˜ì§€ë§Œ ë¹„ë²ˆì´ ë¶ˆì¼ì¹˜
 				}
 			}else {
-				result = -1;  //ÇØ´ç ¾ÆÀÌµğ°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù
+				result = -1;  //í•´ë‹¹ ì•„ì´ë””ê°€ ì¡´ì¬í•˜ì§€ ì•ŠëŠ”ë‹¤
 			}
 			
 			
@@ -199,7 +199,7 @@ public class MemberDAO {
 
 	
 	
-	//ÇØ´ç ¾ÆÀÌµğ¸¦ °¡Áø À¯ÀúÀÇ ÄíÆù¸®½ºÆ® ¸ğµÎ °¡Á®¿À±â
+	//í•´ë‹¹ ì•„ì´ë””ë¥¼ ê°€ì§„ ìœ ì €ì˜ ì¿ í°ë¦¬ìŠ¤íŠ¸ ëª¨ë‘ ê°€ì ¸ì˜¤ê¸°
 	public ArrayList<CouponVO> getCoupon(String id) throws SQLException {
 		
 		ArrayList<CouponVO> cvo = new ArrayList<CouponVO>();
@@ -234,10 +234,10 @@ public class MemberDAO {
 	}
 
 	
-	//ÇØ´ç ¾ÆÀÌµğ¸¦ °¡Áø À¯ÀúÀÇ ÄíÆù °³¼ö ±¸ÇÏ±â
+	//í•´ë‹¹ ì•„ì´ë””ë¥¼ ê°€ì§„ ìœ ì €ì˜ ì¿ í° ê°œìˆ˜ êµ¬í•˜ê¸°
 	public int getCountCoupon(String id) throws SQLException {
 		
-		System.out.println("³Ñ¾î¿Â °ª:"+id);
+		System.out.println("ë„˜ì–´ì˜¨ ê°’:"+id);
 		int count = 0;
 		
 		PreparedStatement pstmt = null;

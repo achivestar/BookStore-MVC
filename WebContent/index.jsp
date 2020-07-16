@@ -19,6 +19,7 @@
 	
   <header class="blog-header py-3">
     <div class="py-2 text-right">
+    
 		<%
 			if(id==null){
 		%>
@@ -34,9 +35,15 @@
 		%>
 		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=mypage">마이페이지</a>
 		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=cart">장바구니</a>
+		<%
+        	if(id!=null&&id.equals("admin")){%>
+		<a class="btn btn-sm fnt btn-outline-info"  role="button" href="./admin/AdminController.do?command=index" >관리자</a> 
+		<%
+        	}
+		%>
 	</div>
    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">브랜드로고</a>
+  <a class="navbar-brand" href="./portfolio2/Controller.do?command=index">브랜드로고</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars" aria-controls="navbars" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
