@@ -14,7 +14,7 @@ public class orderFormAction implements AdminAction {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 		 
-		 String url = "./order.jsp";
+		 String url = "./order/order.jsp";
 		 
 		 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		 try {

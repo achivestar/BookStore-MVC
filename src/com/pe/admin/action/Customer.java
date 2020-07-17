@@ -14,7 +14,7 @@ public class Customer implements AdminAction {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 
-		String url = "./customer.jsp";
+		String url = "./customer/customer.jsp";
 		 
 		 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		 try {

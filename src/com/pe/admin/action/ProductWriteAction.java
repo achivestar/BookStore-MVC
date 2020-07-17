@@ -16,7 +16,7 @@ public class ProductWriteAction implements AdminAction {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
 		
-		String url = "./ProductWriteForm.jsp";
+		String url = "./product/ProductWriteForm.jsp";
 		 
 		 RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		 try {
