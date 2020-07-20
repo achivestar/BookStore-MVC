@@ -4,14 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Dashboard | bluering BookStore</title>
-<link rel="canonical"
-	href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 <link href="./assets/dist/css/bootstrap.css" rel="stylesheet">
 <link href="./custom.css" rel="stylesheet">
 <link href="dashboard.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css"  href="../js/jquery-ui.css">
+<script src="../js/bookRegist.js"></script>
+
+
+
 </head>
 <body>
 	<jsp:include page="../menu.jsp" />
@@ -23,77 +26,99 @@
 		<div class="row" >
 		<div class="col-md-8">
 		<!--  form start -->
-		<form>
+		<form  method="post"  action="./AdminController.do?command=BookRegistAction" enctype="multipart/form-data" name="bookRegist"  id="bookRegist" onsubmit="return checkForm()">
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputEmail4">책 제목</label> <input type="email"
-						class="form-control" id="inputEmail4">
+					<label for="bookName">책 제목</label> 
+					<input type="type" class="form-control" id="bookName" name="bookName">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputPassword4">책 저자</label> <input type="password"
-						class="form-control" id="inputPassword4">
+					<label for="author">책 저자</label>
+					 <input type="type" class="form-control" id="author" name="author">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputAddress">출판사</label> <input type="text"
-						class="form-control" id="inputAddress">
+					<label for="publishing">출판사</label> 
+					<input type="text" class="form-control" id="publishing" name="publishing">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputAddress2">출판일자</label> <input type="text"
-						class="form-control" id="inputAddress2">
+					<label for="publishDay">출판일자 (ex : 2020-05-05)</label> 
+					<input type="text" class="form-control"  id="datepicker" name="publishDay">
 				</div>
 			</div>	
 			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="inputAddress">원가격</label> <input type="text"
-						class="form-control" id="inputAddress" >
+				<div class="form-group col-md-4">
+					<label for="cost">원가격</label> 
+					<input type="text" class="form-control" id="cost" name="cost"  onBlur="numberFormat(this.value)">
 				</div>
-				<div class="form-group col-md-6">
-					<label for="inputAddress2">판매가격</label> <input type="text"
-						class="form-control" id="inputAddress2">
+				<div class="form-group col-md-4">
+					<label for="rate">할인율</label> 
+					<input type="text" class="form-control" id="rate" name="rate"  onBlur="rateCalc(this.value)">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="sellingPrice">판매가격</label> 
+					<input type="text"	class="form-control" id="sellingPrice" name="sellingPrice" readonly>
 				</div>
 			</div>
 			<div class="form-row">
+				<div class="form-group col-md-4">
+					<label for="pageNum">페이지 수</label> 
+					<input type="text"	class="form-control"  id="pageNum"  name="pageNum">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="weight">무게</label> 
+					<input type="text"	class="form-control" id="weight" name="weight">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="size">크기</label> 
+					<input type="text" class="form-control" id="size" name="size" value="145*210">
+				</div>
+			</div>
+			<hr/>
+			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="inputAddress">카테고리 [대분류]</label>
-					 <select id="inputState" class="form-control">
-				        <option selected>Choose...</option>
-				        <option>...</option>
+					<label for="category1">카테고리 [대분류]</label>
+					 <select id="category1" class="form-control" name="category1" onchange="categoryChange(this)">
+					 	<option value="none">-대분류-</option>
+				        <option value="IT모바일">IT모바일</option>
+				        <option value="소설/시/희곡">소설/시/희곡</option>
+				        <option value="어린이">어린이</option>
+				        <option value="에세이">에세이</option>
+				        <option value="종교">종교</option>
 				      </select>
 				</div>
 				<div class="form-group col-md-6">
-					<label for="inputAddress2">카테고리 [소분류]</label> 
-					<select id="inputState" class="form-control">
-					        <option selected>Choose...</option>
-					        <option>...</option>
+					<label for="category2">카테고리 [소분류]</label> 
+					<select id="category2" class="form-control" name="category2">
+					        <option value="none">-소분류-</option>
 					  </select>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label for="inputAddress">책 설명</label> 
-					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					<label for="comment">책 설명</label> 
+					<textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-12">
-					<label for="inputAddress">책 이미지</label> 
-					<input type="file" class="form-control-file" id="exampleFormControlFile1">
+					<label for="bookImage">책 이미지</label> 
+					<input type="file" class="form-control-file" id="bookImage" name="bookImage" accept="images/gif, image/jpg, image/jpeg, image/png">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<label for="inputAddress">베스트상품</label> 
-					<input class="form-check" type="checkbox" id="gridCheck1">
+					<label for="bestProduct">베스트상품</label> 
+					<input class="form-check" type="checkbox" id="bestProduct" name="bestProduct">
 				</div>
 				<div class="form-group col-md-4">
-					<label for="inputAddress">오늘의상품</label> 
-					<input class="form-check" type="checkbox" id="gridCheck1">
+					<label for="todayProduct">오늘의상품</label> 
+					<input class="form-check" type="checkbox" id="todayProduct" name="todayProduct">
 				</div>
 				<div class="form-group col-md-4">
-					<label for="inputAddress">상품숨김</label>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input class="form-check" type="checkbox" id="gridCheck1">
+					<label for="hiddenProduct">상품숨김</label>
+					<input class="form-check" type="checkbox" id="hiddenProduct" name="hiddenProduct">
 
 				</div>
 			</div>
@@ -119,15 +144,30 @@
 	</div>
 	</main>
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
 	<script src="../assets/dist/js/bootstrap.bundle.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+	<script 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 	<script src="dashboard.js"></script>
+
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/jquery-ui.js"></script>
+<script>
+	$(function() {
+	  $( "#datepicker" ).datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    yearSuffix: '년'
+	  });
+	});
+</script>
 </body>
 </html>

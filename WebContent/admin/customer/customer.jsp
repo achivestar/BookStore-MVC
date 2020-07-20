@@ -54,6 +54,7 @@
 						class="form-control" id="inputAddress2">
 				</div>
 			</div>
+			
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="inputAddress">카테고리 [대분류]</label>

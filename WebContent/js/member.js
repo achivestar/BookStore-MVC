@@ -111,7 +111,7 @@ function checkForm(){
 	}
 		
 
-	 if(joinForm.phone1.value==""  ){
+	 if(joinForm.phone1.value=="" ){
 		 $("#phone1").attr("class","form-control is-invalid");
 		 joinForm.phone1.value="";
 			joinForm.phone1.focus();
