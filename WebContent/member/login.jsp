@@ -20,7 +20,7 @@
   <body>
    <%
    		String message = (String)request.getAttribute("message");
-       String site = request.getParameter("site");
+        String site = request.getParameter("site");
    %>
     <div class="container">
 	<jsp:include page="/top.jsp" />

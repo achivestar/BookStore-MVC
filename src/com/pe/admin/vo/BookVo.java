@@ -1,7 +1,8 @@
 package com.pe.admin.vo;
 
-public class bookVo {
+public class BookVo {
 
+	private String bookId;
 	private String bookName;
 	private String author;
 	private String publishing;
@@ -11,7 +12,7 @@ public class bookVo {
 	private String sellingPrice;
 	private int pageNum;
 	private int weight;
-	private int size;
+	private String size;
 	private String category1;
 	private String category2;
 	private String comment;
@@ -19,6 +20,15 @@ public class bookVo {
 	private String bestProduct;
 	private String todayProduct;
 	private String hiddenProduct;
+	
+	
+	
+	public String getBookId() {
+		return bookId;
+	}
+	public void setBookId(String bookId) {
+		this.bookId = bookId;
+	}
 	public String getBookName() {
 		return bookName;
 	}
@@ -73,10 +83,10 @@ public class bookVo {
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
-	public int getSize() {
+	public String getSize() {
 		return size;
 	}
-	public void setSize(int size) {
+	public void setSize(String size) {
 		this.size = size;
 	}
 	public String getCategory1() {

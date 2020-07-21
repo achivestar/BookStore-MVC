@@ -12,15 +12,13 @@
 <link href="dashboard.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"  href="../js/jquery-ui.css">
 <script src="../js/bookRegist.js"></script>
-
-
-
 </head>
 <body>
+
 	<jsp:include page="../menu.jsp" />
 	<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-md-4">
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-			<h1 class="h2">상품관리</h1>
+			<h1 class="h2">상품관리</h1> 
 			<p><span>Home</span> > <span>상품등록</span></p>
 		</div>
 		<div class="row" >
@@ -30,56 +28,56 @@
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="bookName">책 제목</label> 
-					<input type="type" class="form-control" id="bookName" name="bookName">
+					<input type="type" class="form-control form-control-sm" id="bookName" name="bookName">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="author">책 저자</label>
-					 <input type="type" class="form-control" id="author" name="author">
+					 <input type="type" class="form-control form-control-sm" id="author" name="author">
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="publishing">출판사</label> 
-					<input type="text" class="form-control" id="publishing" name="publishing">
+					<input type="text" class="form-control form-control-sm" id="publishing" name="publishing">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="publishDay">출판일자 (ex : 2020-05-05)</label> 
-					<input type="text" class="form-control"  id="datepicker" name="publishDay">
+					<input type="text" class="form-control form-control-sm"  id="datepicker" name="publishDay">
 				</div>
 			</div>	
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="cost">원가격</label> 
-					<input type="text" class="form-control" id="cost" name="cost"  onBlur="numberFormat(this.value)">
+					<input type="text" class="form-control form-control-sm" id="cost" name="cost"  onBlur="numberFormat(this.value)">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="rate">할인율</label> 
-					<input type="text" class="form-control" id="rate" name="rate"  onBlur="rateCalc(this.value)">
+					<input type="text" class="form-control form-control-sm" id="rate" name="rate"  onBlur="rateCalc(this.value)">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="sellingPrice">판매가격</label> 
-					<input type="text"	class="form-control" id="sellingPrice" name="sellingPrice" readonly>
+					<input type="text"	class="form-control form-control-sm" id="sellingPrice" name="sellingPrice" readonly>
 				</div>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="pageNum">페이지 수</label> 
-					<input type="text"	class="form-control"  id="pageNum"  name="pageNum">
+					<input type="text"	class="form-control form-control-sm"  id="pageNum"  name="pageNum">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="weight">무게</label> 
-					<input type="text"	class="form-control" id="weight" name="weight">
+					<input type="text"	class="form-control form-control-sm" id="weight" name="weight">
 				</div>
 				<div class="form-group col-md-4">
 					<label for="size">크기</label> 
-					<input type="text" class="form-control" id="size" name="size" value="145*210">
+					<input type="text" class="form-control form-control-sm" id="size" name="size" value="145*210">
 				</div>
 			</div>
 			<hr/>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="category1">카테고리 [대분류]</label>
-					 <select id="category1" class="form-control" name="category1" onchange="categoryChange(this)">
+					 <select id="category1" class="form-control form-control-sm" name="category1" onchange="categoryChange(this)">
 					 	<option value="none">-대분류-</option>
 				        <option value="IT모바일">IT모바일</option>
 				        <option value="소설/시/희곡">소설/시/희곡</option>
@@ -90,7 +88,7 @@
 				</div>
 				<div class="form-group col-md-6">
 					<label for="category2">카테고리 [소분류]</label> 
-					<select id="category2" class="form-control" name="category2">
+					<select id="category2" class="form-control form-control-sm" name="category2">
 					        <option value="none">-소분류-</option>
 					  </select>
 				</div>
@@ -98,7 +96,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label for="comment">책 설명</label> 
-					<textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
+					<textarea class="form-control form-control-sm" id="comment" rows="3" name="comment"></textarea>
 				</div>
 			</div>
 			<div class="form-row">
@@ -109,19 +107,40 @@
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<label for="bestProduct">베스트상품</label> 
-					<input class="form-check" type="checkbox" id="bestProduct" name="bestProduct">
+					<label for="bestProduct">베스트상품</label> <br>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="bestProduct" id="jb-radio-1" class="custom-control-input" value="y">
+						<label class="custom-control-label" for="jb-radio-1">Y</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="bestProduct" id="jb-radio-2" class="custom-control-input"  value="n" checked="checked">
+						<label class="custom-control-label" for="jb-radio-2">N</label>
+					</div>
 				</div>
 				<div class="form-group col-md-4">
-					<label for="todayProduct">오늘의상품</label> 
-					<input class="form-check" type="checkbox" id="todayProduct" name="todayProduct">
+					<label for="todayProduct">오늘의상품</label> <br>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="todayProduct" id="jb-radio-3" class="custom-control-input" value="y">
+						<label class="custom-control-label" for="jb-radio-3">Y</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="todayProduct" id="jb-radio-4" class="custom-control-input"  value="n" checked="checked">
+						<label class="custom-control-label" for="jb-radio-4">N</label>
+					</div>
 				</div>
 				<div class="form-group col-md-4">
-					<label for="hiddenProduct">상품숨김</label>
-					<input class="form-check" type="checkbox" id="hiddenProduct" name="hiddenProduct">
-
-				</div>
+					<label for="hiddenProduct">상품숨김</label><br>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="hiddenProduct" id="jb-radio-5" class="custom-control-input" value="y">
+						<label class="custom-control-label" for="jb-radio-5">Y</label>
+					</div>
+					<div class="custom-control custom-radio">
+						<input type="radio" name="hiddenProduct" id="jb-radio-6" class="custom-control-input"  value="n" checked="checked">
+						<label class="custom-control-label" for="jb-radio-6">N</label>
+					</div>
 			</div>
+			
+		</div>
 			<button type="submit" class="btn btn-primary btn-block">등록</button>
 			<br><br>
 		</form>
@@ -139,22 +158,24 @@
 				<p>에쎄이 17권</p>
 			</div>	
 			<br>
-			<button type="button" class="btn btn-outline-primary btn-block">상품목록</button>
+			<a href="AdminController.do?command=BookList"  class="btn btn-outline-primary">상품목록</a>
+			<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
 		</div>
 	</div>
 	</main>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
 	<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
 	<script src="../assets/dist/js/bootstrap.bundle.js"></script>
 	<script 	src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 	<script src="dashboard.js"></script>
-
-<script src="../js/jquery-1.11.3.min.js"></script>
-<script src="../js/jquery-ui.js"></script>
+	<script src="../js/jquery-1.11.3.min.js"></script>
+	<script src="../js/jquery-ui.js"></script>
 <script>
 	$(function() {
+	//$('#myModal').modal('show');
 	  $( "#datepicker" ).datepicker({
 	    dateFormat: 'yy-mm-dd',
 	    prevText: '이전 달',
@@ -168,6 +189,7 @@
 	    yearSuffix: '년'
 	  });
 	});
+	
 </script>
 </body>
 </html>

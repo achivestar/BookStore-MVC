@@ -14,6 +14,10 @@ public class AdminActionFactory {
 			action = new orderFormAction();
 		}else if(command.equals("customer")) {
 			action = new Customer();
+		}else if(command.equals("BookRegistAction")) {
+			action = new BookRegistAction();
+		}else if(command.equals("BookList")) {
+			action = new BookListAction();
 		}
 		
 		
