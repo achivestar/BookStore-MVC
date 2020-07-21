@@ -45,12 +45,12 @@
 					  for(int i=0; i<bookList.size();i++){
 				  %>
 				    <tr>
-				       <td>  <img src="/bookUpload/<%=bookList.get(i).getBookImage()%>" alt="" style="height:160px" class="img-thumbnail"></td>
-				       <td><%=bookList.get(i).getBookName()%></td>
-				       <td><%=bookList.get(i).getAuthor()%></td>
-				       <td><%=bookList.get(i).getPublishing() %></td>
-				       <td><%=bookList.get(i).getCost() %>
-				       <td colspan="2"><a href="#" class="btn btn-warning btn-sm">수정</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">삭제</a></td>
+				       <td style="vertical-align:middle">  <img src="/bookUpload/<%=bookList.get(i).getBookImage()%>" alt="" style="height:90px;width:70px" class="img-thumbnail"></td>
+				       <td style="vertical-align:middle"><%=bookList.get(i).getBookName()%></td>
+				       <td style="vertical-align:middle"><%=bookList.get(i).getAuthor()%></td>
+				       <td style="vertical-align:middle"><%=bookList.get(i).getPublishing() %></td>
+				       <td style="vertical-align:middle"><%=bookList.get(i).getCost() %>
+				       <td style="vertical-align:middle" colspan="2"><a href="#" class="btn btn-warning btn-sm">수정</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">삭제</a></td>
 				    </tr>
 				   <%
 					  }
