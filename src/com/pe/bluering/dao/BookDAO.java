@@ -77,14 +77,79 @@ public class BookDAO {
 		
 	}
 
-	public ArrayList<BookVo> selectAllBook() {
-		
+	public ArrayList<BookVo> selectAllBook(int page, int limit) {
+
 		ArrayList<BookVo> bookList = new ArrayList<BookVo>();
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
+		int startRow = (page-1) * 10;  // 읽기 시작할 row번호
 		try {
-			String sql = "SELECT * FROM hbook order by bookId desc";
+			String sql = "SELECT * FROM hbook order by bookId desc limit ?,10";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BookVo bookvo = new BookVo();
+				bookvo.setBookId(rs.getString("bookId"));
+				bookvo.setBookName(rs.getString("bookName"));
+				bookvo.setAuthor(rs.getString("author"));
+				bookvo.setPublishing(rs.getString("publishing"));
+				bookvo.setPublishDay(rs.getString("publishDay"));
+				bookvo.setCost(rs.getString("cost"));
+				bookvo.setRate(rs.getInt("rate"));
+				bookvo.setSellingPrice(rs.getString("sellingPrice"));
+				bookvo.setPageNum(rs.getInt("pageNum"));
+				bookvo.setSize(rs.getString("size"));
+				bookvo.setCategory1(rs.getString("category1"));
+				bookvo.setCategory2(rs.getString("category2"));
+				bookvo.setComment(rs.getString("comment"));
+				bookvo.setBookImage(rs.getString("bookImage"));
+				bookvo.setBestProduct(rs.getString("bestProduct"));
+				bookvo.setTodayProduct(rs.getString("todayProduct"));
+				bookvo.setHiddenProduct(rs.getString("hiddenProduct"));
+				
+				bookList.add(bookvo);
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return bookList;
+	}
+
+	public int selectListCount() {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT count(*) FROM hbook";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listCount;
+	}
+
+	public ArrayList<BookVo> selectOneBook(String bookId) {
+		ArrayList<BookVo> bookList = new ArrayList<BookVo>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "SELECT * FROM hbook WHERE bookId = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bookId);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

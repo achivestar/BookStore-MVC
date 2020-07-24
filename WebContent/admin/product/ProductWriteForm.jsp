@@ -158,7 +158,7 @@
 				<p>에쎄이 17권</p>
 			</div>	
 			<br>
-			<a href="AdminController.do?command=BookList"  class="btn btn-outline-primary">상품목록</a>
+			<a href="AdminController.do?command=BookList&page=1"  class="btn btn-outline-primary">상품목록</a>
 			<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
 		</div>
 	</div>

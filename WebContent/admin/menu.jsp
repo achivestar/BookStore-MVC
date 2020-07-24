@@ -33,7 +33,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link  <%if(url.equals("productWriteForm")){%><%=active %><%}%>" href="AdminController.do?command=productWriteForm">
+            <a class="nav-link  <%if(url.equals("productWriteForm") || url.equals("BookList")){%><%=active %><%}%>" href="AdminController.do?command=productWriteForm">
               <span data-feather="shopping-cart"></span>
               Products
             </a>
