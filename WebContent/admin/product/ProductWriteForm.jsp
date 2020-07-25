@@ -26,9 +26,15 @@
 		<!--  form start -->
 		<form  method="post"  action="./AdminController.do?command=BookRegistAction" enctype="multipart/form-data" name="bookRegist"  id="bookRegist" onsubmit="return checkForm()">
 			<div class="form-row">
-				<div class="form-group col-md-6">
-					<label for="bookName">책 제목</label> 
+				<div class="form-group col-md-12">
+					<label for="bookName">책 이름</label> 
 					<input type="type" class="form-control form-control-sm" id="bookName" name="bookName">
+				</div>
+			</div>	
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="bookSubtitle">책 부제</label>
+					 <input type="type" class="form-control form-control-sm" id="bookSubtitle" name="bookSubTitle">
 				</div>
 				<div class="form-group col-md-6">
 					<label for="author">책 저자</label>
@@ -96,7 +102,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-12">
 					<label for="comment">책 설명</label> 
-					<textarea class="form-control form-control-sm" id="comment" rows="3" name="comment"></textarea>
+					<textarea class="form-control form-control-sm" id="comment" rows="10" name="comment"></textarea>
 				</div>
 			</div>
 			<div class="form-row">
@@ -108,35 +114,36 @@
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="bestProduct">베스트상품</label> <br>
-					<div class="custom-control custom-radio">
-						<input type="radio" name="bestProduct" id="jb-radio-1" class="custom-control-input" value="y">
-						<label class="custom-control-label" for="jb-radio-1">Y</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" name="bestProduct" id="jb-radio-2" class="custom-control-input"  value="n" checked="checked">
-						<label class="custom-control-label" for="jb-radio-2">N</label>
-					</div>
-				</div>
-				<div class="form-group col-md-4">
-					<label for="todayProduct">오늘의상품</label> <br>
-					<div class="custom-control custom-radio">
-						<input type="radio" name="todayProduct" id="jb-radio-3" class="custom-control-input" value="y">
-						<label class="custom-control-label" for="jb-radio-3">Y</label>
-					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" name="todayProduct" id="jb-radio-4" class="custom-control-input"  value="n" checked="checked">
-						<label class="custom-control-label" for="jb-radio-4">N</label>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info">
+							<input type="radio" name="bestProduct" id="jb-radio-1" value="y"> 등록
+						</label>
+						<label class="btn btn-info">
+							<input type="radio" name="bestProduct" id="jb-radio-2" value="n" checked="checked"> 해제
+						</label>
 					</div>
 				</div>
 				<div class="form-group col-md-4">
-					<label for="hiddenProduct">상품숨김</label><br>
-					<div class="custom-control custom-radio">
-						<input type="radio" name="hiddenProduct" id="jb-radio-5" class="custom-control-input" value="y">
-						<label class="custom-control-label" for="jb-radio-5">Y</label>
+					 <label for="todayProduct">오늘의상품</label><br>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info">
+							<input type="radio" name="todayProduct" id="jb-radio-3" value="y"> 등록
+						</label>
+						<label class="btn btn-info">
+							<input type="radio" name="todayProduct" id="jb-radio-4" value="n" checked="checked"> 해제
+						</label>
 					</div>
-					<div class="custom-control custom-radio">
-						<input type="radio" name="hiddenProduct" id="jb-radio-6" class="custom-control-input"  value="n" checked="checked">
-						<label class="custom-control-label" for="jb-radio-6">N</label>
+
+				</div>
+				<div class="form-group col-md-4">
+					<label for="hiddenProduct">상품매진</label><br>
+					<div class="btn-group btn-group-toggle" data-toggle="buttons">
+						<label class="btn btn-info">
+							<input type="radio" name="hiddenProduct" id="jb-radio-5" value="y"> 등록
+						</label>
+						<label class="btn btn-info">
+							<input type="radio" name="hiddenProduct" id="jb-radio-6" value="n" checked="checked"> 해제
+						</label>
 					</div>
 			</div>
 			

@@ -24,25 +24,29 @@
 <title>Dashboard | bluering BookStore</title>
 <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
 <link href="./assets/dist/css/bootstrap.css" rel="stylesheet">
+<style>
+	.displayLoding{
+		display:none;
+	}
+</style>
 <link href="./custom.css" rel="stylesheet">
 <link href="dashboard.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"  href="../js/jquery-ui.css">
+
 <script src="../js/bookRegist.js"></script>
-<script>
-
-
-</script>
 </head>
 <body>
 
 	<jsp:include page="../menu.jsp" />
+
 	<main role="main" class="col-md-12 ml-sm-auto col-lg-10 px-md-4">
 		<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="h2">상품목록</h1> 
 			<p><span>Home</span> > <span>상품목록</span></p>
 		</div>
 		<div class="row" >
-		<div class="col-md-12">
+
+		<div class="col-md-8">
 
 			<table class="table">
 				  <thead class="thead-dark">
@@ -50,8 +54,6 @@
 				      <th scope="col" >#</th>	
 				      <th scope="col">책 이름</th>
 				      <th scope="col">저자</th>
-				      <th scope="col">출판사</th>
-				      <th scope="col">정가</th>
 				      <th scope="col" class="text-center">관리</th>
 
 				    </tr>
@@ -65,8 +67,6 @@
 				       <td style="vertical-align:middle">  <img src="/bookUpload/<%=bookList.get(i).getBookImage()%>" alt="" style="height:90px;width:70px" class="img-thumbnail"></td>
 				       <td style="vertical-align:middle"><a href="#addBookDialog"  data-id="<%=bookList.get(i).getBookId()%>" data-toggle="modal" class="open-AddBookDialog"><%=bookList.get(i).getBookName()%></a></td>
 				       <td style="vertical-align:middle"><%=bookList.get(i).getAuthor()%></td>
-				       <td style="vertical-align:middle"><%=bookList.get(i).getPublishing() %></td>
-				       <td style="vertical-align:middle"><%=bookList.get(i).getCost() %>
 				       <td style="vertical-align:middle" colspan="2"><a href="#" class="btn btn-warning btn-sm">수정</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">삭제</a></td>
 				    </tr>
 						
@@ -133,9 +133,26 @@
 			
 				
 		</div>
+		<div class="col-md-4 text-left">
+			<div style="border:1px solid #ddd;padding:20px">
+				<p>현재 등록된 도서 130권</p>
+				<p>기술 30권</p>
+				<p>만화 30권</p>
+				<p>소설 20권</p>
+				<p>잡지 43권</p>
+				<p>에쎄이 17권</p>
+			</div>	
+			<br>
+			<a href="AdminController.do?command=productWriteForm"  class="btn btn-outline-primary">상품등록</a>
+			<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
+		</div>
 		</div>
 	</main>
+
     <!-- Modal -->	
+<div class="spinner-border text-primary displayLoding" role="status"  style="position:fixed;top:50%;left:50%;">
+  <span class="sr-only">Loading...</span>
+</div>
 <div class="modal fade " id="addBookDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
@@ -181,6 +198,13 @@
 					success: function(data){
 						$('.modal-body').html(data);
 					}
+					,beforeSend : function(){
+						$(".spinner-border").removeClass("displayLoding");
+					},
+					complete:function(){
+						$(".spinner-border").addClass("displayLoding");	
+					}
+					
 				})
 
 		})

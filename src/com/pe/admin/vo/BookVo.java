@@ -4,6 +4,7 @@ public class BookVo {
 
 	private String bookId;
 	private String bookName;
+	private String bookSubTitle;
 	private String author;
 	private String publishing;
 	private String publishDay;
@@ -28,6 +29,13 @@ public class BookVo {
 	}
 	public void setBookId(String bookId) {
 		this.bookId = bookId;
+	}
+	
+	public String getBookSubTitle() {
+		return bookSubTitle;
+	}
+	public void setBookSubTitle(String bookSubTitle) {
+		this.bookSubTitle = bookSubTitle;
 	}
 	public String getBookName() {
 		return bookName;

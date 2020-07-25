@@ -44,15 +44,17 @@ public class BookRegistAction implements AdminAction {
 		
 		bookvo.setBookId(bookId);
 		bookvo.setBookName(multi.getParameter("bookName"));
+		bookvo.setBookSubTitle(multi.getParameter("bookSubTitle"));
 		bookvo.setAuthor(multi.getParameter("author"));
 		bookvo.setPublishing(multi.getParameter("publishing"));
 		bookvo.setPublishDay(multi.getParameter("publishDay"));
 		bookvo.setCost(multi.getParameter("cost"));
 		bookvo.setRate(Integer.parseInt(multi.getParameter("rate")));
 		bookvo.setSellingPrice(multi.getParameter("sellingPrice"));
-		bookvo.setPageNum(Integer.parseInt(multi.getParameter("pageNum")));
-		bookvo.setWeight(Integer.parseInt(multi.getParameter("weight")));
+	    bookvo.setPageNum(Integer.parseInt(multi.getParameter("pageNum")));
+	    bookvo.setWeight(Integer.parseInt(multi.getParameter("weight")));
 		bookvo.setSize(multi.getParameter("size"));
+
 		bookvo.setCategory1(multi.getParameter("category1"));
 		bookvo.setCategory2(multi.getParameter("category2"));
 		bookvo.setComment(multi.getParameter("comment"));
@@ -69,10 +71,25 @@ public class BookRegistAction implements AdminAction {
 				 bookvo.setBookImage(updateFile);
 			 }
 		 }
-		 
-	  bookvo.setBestProduct(multi.getParameter("bestProduct"));
-	  bookvo.setTodayProduct(multi.getParameter("todayProduct"));
-	  bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
+		
+	 if(multi.getParameter("bestProduct").equals("y")) {
+		  bookvo.setBestProduct(multi.getParameter("bestProduct"));
+	 }else if(multi.getParameter("bestProduct") == null) {
+		  bookvo.setBestProduct("n");
+	 }
+	
+	 if(multi.getParameter("todayProduct").equals("y")) {
+		  bookvo.setTodayProduct(multi.getParameter("todayProduct"));
+	 }else if(multi.getParameter("todayProduct")== null) {
+		 bookvo.setTodayProduct("n");
+	 }
+	
+	 if(multi.getParameter("hiddenProduct").equals("y")) {
+		 bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
+	 }else if(multi.getParameter("hiddenProduct")== null) {
+		 bookvo.setHiddenProduct("n");
+	 }
+	 
 	  
 	  BookRegistService  bookRes = new BookRegistService();
 	  boolean isRegitSuccess = bookRes.bookRegist(bookvo);

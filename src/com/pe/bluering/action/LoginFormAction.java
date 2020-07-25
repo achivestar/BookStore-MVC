@@ -14,7 +14,7 @@ public class LoginFormAction implements Action {
 	
 
 	String site = request.getParameter("site");
-   String url = "/member/login.jsp";
+    String url = "/member/login.jsp";
 		
 		if(site != null) {
 			if(site.equals("cart")) {

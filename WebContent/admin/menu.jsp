@@ -3,17 +3,29 @@
 <%
 	String url = request.getParameter("command");
 	String active = "active";
-%>    
+	String type = null;
+%>   
+<%if(url.equals("productWriteForm") || url.equals("BookList")){
+	type="productSearch";
+}else if(url.equals("orderForm")){
+	type = "orderSearch";
+}else if(url.equals("customer")){
+	type = "customerSearch";
+}
+%>
+
+<form action="AdminController.do?command=Search"  method="post">
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="../portfolio2/Controller.do?command=index">Bluering BookStore</a>
-
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="searchKey">
+  <input type="hidden" name="type" value="<%=type%>" />
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <a class="nav-link" href="#">Sign out</a>
+      <input type="submit" class="nav-link  btn btn-dark" value="검색" >
     </li>
   </ul>
 </nav>
+</form>
 
 <div class="container-fluid">
   <div class="row">

@@ -69,11 +69,7 @@ function checkForm(){
 			bookRegist.weight.focus();
 			return false;
 		}
-		if(bookRegist.size.value==""){
-			alert("책의 크기를 입력하세요 \n ex) 145*210mm");
-			bookRegist.size.focus();
-			return false;
-		}
+
 		if(bookRegist.category1.value=='none'){
 			alert("대분류를 선택하세요");
 			bookRegist.category1.focus();
@@ -85,7 +81,7 @@ function checkForm(){
 			return false;
 		}
 		if(bookRegist.comment.value==""){
-			alert("책의 설명을 입력하세요");
+			alert("책의 소개를 입력하세요");
 			bookRegist.comment.focus();
 			return false;
 		}

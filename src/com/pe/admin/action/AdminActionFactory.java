@@ -20,6 +20,8 @@ public class AdminActionFactory {
 			action = new BookListAction();
 		}else if(command.equals("BookDetail")) {
 			action = new BookDetailAction();
+		}else if(command.equals("Search")) {
+			action = new SearchAction();
 		}
 		
 		return action;

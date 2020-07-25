@@ -11,7 +11,7 @@
 %>
 			<div class="container-fluid">
 				<div class="row">
-				  <div class="col-md-4"><img src="./bookUpload/<%=oneBook.get(i).getBookImage() %>" alt="..." class="img-thumbnail"></div>
+				  <div class="col-md-4"><img src="../bookUpload/<%=oneBook.get(i).getBookImage() %>" alt="..." class="img-thumbnail"></div>
 				  <div class="col-md-8">
 						<p class="h2"><%=oneBook.get(i).getBookName() %></p>
 						 <p class="h4 text-secondary">책 부제</p>

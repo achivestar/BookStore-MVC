@@ -42,28 +42,29 @@ public class BookDAO {
 		int insertCount = 0;
 		
 		try {
-			String sql = "INSERT INTO hbook (bookId,bookName,author,publishing,publishDay,cost,rate,sellingPrice,pageNum,weight,size,category1,category2,comment,bookImage,bestProduct,todayProduct,hiddenProduct)"
-					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO hbook (bookId,bookName,bookSubTitle,author,publishing,publishDay,cost,rate,sellingPrice,pageNum,weight,size,category1,category2,comment,bookImage,bestProduct,todayProduct,hiddenProduct)"
+					+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bookvo.getBookId());
 			pstmt.setString(2, bookvo.getBookName());
-			pstmt.setString(3, bookvo.getAuthor());
-			pstmt.setString(4, bookvo.getPublishing());
-			pstmt.setString(5, bookvo.getPublishDay());
-			pstmt.setString(6, bookvo.getCost());
-			pstmt.setInt(7, bookvo.getRate());
-			pstmt.setString(8, bookvo.getSellingPrice());
-			pstmt.setInt(9, bookvo.getPageNum());
-			pstmt.setInt(10, bookvo.getWeight());
-			pstmt.setString(11, bookvo.getSize());
-			pstmt.setString(12, bookvo.getCategory1());
-			pstmt.setString(13, bookvo.getCategory2());
-			pstmt.setString(14, bookvo.getComment());
-			pstmt.setString(15, bookvo.getBookImage());
-			pstmt.setString(16, bookvo.getBestProduct());
-			pstmt.setString(17, bookvo.getTodayProduct());
-			pstmt.setString(18, bookvo.getHiddenProduct());
+			pstmt.setString(3, bookvo.getBookSubTitle());
+			pstmt.setString(4, bookvo.getAuthor());
+			pstmt.setString(5, bookvo.getPublishing());
+			pstmt.setString(6, bookvo.getPublishDay());
+			pstmt.setString(7, bookvo.getCost());
+			pstmt.setInt(8, bookvo.getRate());
+			pstmt.setString(9, bookvo.getSellingPrice());
+			pstmt.setInt(10, bookvo.getPageNum());
+			pstmt.setInt(11, bookvo.getWeight());
+			pstmt.setString(12, bookvo.getSize());
+			pstmt.setString(13, bookvo.getCategory1());
+			pstmt.setString(14, bookvo.getCategory2());
+			pstmt.setString(15, bookvo.getComment());
+			pstmt.setString(16, bookvo.getBookImage());
+			pstmt.setString(17, bookvo.getBestProduct());
+			pstmt.setString(18, bookvo.getTodayProduct());
+			pstmt.setString(19, bookvo.getHiddenProduct());
 		
 			insertCount = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -93,6 +94,7 @@ public class BookDAO {
 				BookVo bookvo = new BookVo();
 				bookvo.setBookId(rs.getString("bookId"));
 				bookvo.setBookName(rs.getString("bookName"));
+				bookvo.setBookSubTitle(rs.getString("bookSubTitle"));
 				bookvo.setAuthor(rs.getString("author"));
 				bookvo.setPublishing(rs.getString("publishing"));
 				bookvo.setPublishDay(rs.getString("publishDay"));
@@ -156,6 +158,7 @@ public class BookDAO {
 				BookVo bookvo = new BookVo();
 				bookvo.setBookId(rs.getString("bookId"));
 				bookvo.setBookName(rs.getString("bookName"));
+				bookvo.setBookSubTitle(rs.getString("bookSubTitle"));
 				bookvo.setAuthor(rs.getString("author"));
 				bookvo.setPublishing(rs.getString("publishing"));
 				bookvo.setPublishDay(rs.getString("publishDay"));
