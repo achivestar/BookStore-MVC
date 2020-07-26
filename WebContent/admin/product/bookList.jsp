@@ -6,6 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	String bookId = request.getParameter("bookId");
+	String filter = request.getParameter("category");
 	ArrayList<BookVo> bookList = (ArrayList<BookVo>) request.getAttribute("bookList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
@@ -28,6 +29,9 @@
 	.displayLoding{
 		display:none;
 	}
+	.paging{
+		display:block;
+	}
 </style>
 <link href="./custom.css" rel="stylesheet">
 <link href="dashboard.css" rel="stylesheet">
@@ -47,7 +51,20 @@
 		<div class="row" >
 
 		<div class="col-md-8">
-
+		<div class="form-row" >
+				<div class="form-group col-md-4 ">
+				<form method="post" name="filterForm"  action="AdminController.do?command=BookList">
+					<select id="category" class="form-control" name="category" onchange="filterChange(this.form)">
+							 	<option value="0" <%if(filter.equals("0")){%>selected <%} %>>ALL</option>
+						        <option value="1" <%if(filter.equals("1")){%>selected <%} %>>IT모바일</option>
+						        <option value="2" <%if(filter.equals("2")){%>selected <%} %>>소설/시/희곡</option>
+						        <option value="3" <%if(filter.equals("3")){%>selected <%} %>>어린이</option>
+						        <option value="4" <%if(filter.equals("4")){%>selected <%} %>>에세이</option>
+						        <option value="5" <%if(filter.equals("5")){%>selected <%} %>>종교</option>
+					</select>
+					</form>
+				</div>
+		</div>
 			<table class="table">
 				  <thead class="thead-dark">
 				    <tr>
@@ -58,9 +75,8 @@
 
 				    </tr>
 				  </thead>
-				  <tbody>
+				  <tbody id="tblBody">
 				  <%
-				   
 					  for(int i=0; i<bookList.size();i++){
 				  %>
 				    <tr>
@@ -75,7 +91,10 @@
 				   %>
 				  </tbody>
 				</table>
-				<nav aria-label="Page navigation example" >
+		<%
+			if(pageInfo!=null){
+		%>		
+				<nav aria-label="Page navigation example" class="paging">
 				  <ul class="pagination"  style="justify-content: center;">
 				    <li class="page-item">
 				    	<%
@@ -87,7 +106,7 @@
 						<%
 							}else{
 						%>
-							  <a class="page-link" href="AdminController.do?command=BookList&page=<%=nowPage-1 %>" aria-label="Previous">
+							  <a class="page-link" href="AdminController.do?command=BookList&page=<%=nowPage-1 %>&category=<%=filter %>" aria-label="Previous">
 				      			  <span aria-hidden="true">&laquo;</span>
 				   			   </a>
 
@@ -104,7 +123,7 @@
 				<%
 					}else{
 				%>
-					  <li class="page-item"><a class="page-link" href="AdminController.do?command=BookList&page=<%=i %>"><%=i%></a></li>
+					  <li class="page-item"><a class="page-link" href="AdminController.do?command=BookList&page=<%=i %>&category=<%=filter %>"><%=i%></a></li>
 				<% 
 					 }
 				}
@@ -119,7 +138,7 @@
 						<%
 							}else{
 						%>
-							 <a class="page-link" href="AdminController.do?command=BookList&page=<%=nowPage+1 %>" aria-label="Next">
+							 <a class="page-link" href="AdminController.do?command=BookList&page=<%=nowPage+1 %>&category=<%=filter %>" aria-label="Next">
 				       			 <span aria-hidden="true">&raquo;</span>
 				     		 </a>
 						<%
@@ -130,7 +149,9 @@
 				  </ul>
 				</nav>
 			
-			
+		<%
+			}
+		%>	
 				
 		</div>
 		<div class="col-md-4 text-left">
@@ -168,7 +189,7 @@
 		
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+
       </div>
     </div>
   </div>
@@ -208,7 +229,10 @@
 				})
 
 		})
-
+	
+		function filterChange(obj){
+			obj.submit();
+		}
 	</script>
 </body>
 </html>

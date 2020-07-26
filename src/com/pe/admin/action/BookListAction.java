@@ -19,11 +19,12 @@ public class BookListAction implements AdminAction {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {	  
-			BookDAO bookDao = new BookDAO();
-			
+
 			int page = 1;
 			int limit = 10;
-			
+		
+			String filter = request.getParameter("category");
+
 		
 			if(request.getParameter("page")!=null) {
 				page = Integer.parseInt(request.getParameter("page"));
@@ -33,10 +34,10 @@ public class BookListAction implements AdminAction {
 
 			
 			BookListService bookListService = new BookListService();
-			int listCount = bookListService.getListCount();
+			int listCount = bookListService.getListCount(filter);
 			//총 리스트 수를 받아옴
 			
-			ArrayList<BookVo> bookList = bookListService.getBookList(page,limit);
+			ArrayList<BookVo> bookList = bookListService.getBookList(page,limit,filter);
 			//총 리스트를 받아옴
 			
 			int maxPage = (int)((double)listCount/limit+0.95);
@@ -61,8 +62,11 @@ public class BookListAction implements AdminAction {
 			pageInfo.setStartPage(startPage);
 			request.setAttribute("pageInfo", pageInfo);
 			request.setAttribute("bookList", bookList);
+			request.setAttribute("filter", filter);
+
+
 			
-			  String url = "./product/bookList.jsp";
+			String url = "./product/bookList.jsp";
 		    RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		 try {
 			dispatcher.forward(request, response);

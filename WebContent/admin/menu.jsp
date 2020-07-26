@@ -5,7 +5,7 @@
 	String active = "active";
 	String type = null;
 %>   
-<%if(url.equals("productWriteForm") || url.equals("BookList")){
+<%if(url.equals("BookList")){
 	type="productSearch";
 }else if(url.equals("orderForm")){
 	type = "orderSearch";
@@ -14,18 +14,33 @@
 }
 %>
 
-<form action="AdminController.do?command=Search"  method="post">
+<%if(url.equals("BookList")){ %>
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="../portfolio2/Controller.do?command=index">Bluering BookStore</a>
-  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="searchKey">
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="searchKey" id="searchKey" onKeyup="enter()">
   <input type="hidden" name="type" value="<%=type%>" />
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
-      <input type="submit" class="nav-link  btn btn-dark" value="검색" >
+      <input type="button" class="nav-link  btn btn-dark" value="검색"  onclick="search()">
     </li>
   </ul>
 </nav>
-</form>
+<%
+}else{
+%>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="../portfolio2/Controller.do?command=index">Bluering BookStore</a>
+  <input type="hidden" name="type" value="<%=type%>" />
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      
+    </li>
+  </ul>
+</nav>
+<%
+}
+%>
+
 
 <div class="container-fluid">
   <div class="row">
@@ -122,3 +137,42 @@
         </ul>
       </div>
     </nav>
+  <script src="../js/jquery-1.11.3.min.js"></script>
+  <script>
+		function search(){
+			var key = $("#searchKey").val();
+			if(key.length>0){
+
+				$.ajax({
+			        type: "get",
+			        cache: false,
+			        url: "./AdminController.do?command=Search",
+			        data: 'searchKey='+key, 
+			        dataType: 'html',
+			        success: function(data) {
+						//alert(data);
+						if(data != null){
+							$("#tblBody").html(data);
+							$(".paging").css("display","none");
+						}
+			        },beforeSend : function(){
+						$(".spinner-border").removeClass("displayLoding");
+					},
+					complete:function(){
+						$(".spinner-border").addClass("displayLoding");	
+					}
+			    }) 
+			}else if(key.length==0){
+				location.reload();
+			}
+	 	
+		}
+		
+		function enter(){
+			if (window.event.keyCode == 13) {
+	            search();
+	        }
+		}
+
+
+</script>
