@@ -196,6 +196,7 @@ public class BookDAO {
 				bookvo.setRate(rs.getInt("rate"));
 				bookvo.setSellingPrice(rs.getString("sellingPrice"));
 				bookvo.setPageNum(rs.getInt("pageNum"));
+				bookvo.setWeight(rs.getInt("weight"));
 				bookvo.setSize(rs.getString("size"));
 				bookvo.setCategory1(rs.getString("category1"));
 				bookvo.setCategory2(rs.getString("category2"));
@@ -277,6 +278,66 @@ public class BookDAO {
 		}
 		
 		return bookList;
+	}
+
+	public int bookUpdate(BookVo bookvo) throws SQLException {
+		
+		PreparedStatement pstmt = null;
+		int isSuccess = 0;
+
+		try {
+			String sql = "UPDATE hbook SET bookName =?,bookSubTitle=?, author=?, publishing=?,publishDay=?,cost=?,rate=?,sellingPrice=?"
+					+ ",pageNum=?,weight=?,size=?,category1=?,category2=?,comment=?,bookImage=?,bestProduct=?,todayProduct=?,hiddenProduct=? WHERE bookId = ?";
+
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, bookvo.getBookName());
+			pstmt.setString(2, bookvo.getBookSubTitle());
+			pstmt.setString(3, bookvo.getAuthor());
+			pstmt.setString(4, bookvo.getPublishing());
+			pstmt.setString(5, bookvo.getPublishDay());
+			pstmt.setString(6, bookvo.getCost());
+			pstmt.setInt(7, bookvo.getRate());
+			pstmt.setString(8, bookvo.getSellingPrice());
+			pstmt.setInt(9, bookvo.getPageNum());
+			pstmt.setInt(10, bookvo.getWeight());
+			pstmt.setString(11, bookvo.getSize());
+			pstmt.setString(12, bookvo.getCategory1());
+			pstmt.setString(13, bookvo.getCategory2());
+			pstmt.setString(14, bookvo.getComment());
+			pstmt.setString(15, bookvo.getBookImage());
+			pstmt.setString(16, bookvo.getBestProduct());
+			pstmt.setString(17, bookvo.getTodayProduct());
+			pstmt.setString(18, bookvo.getHiddenProduct());
+			pstmt.setString(19, bookvo.getBookId());
+
+			isSuccess = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			con.close();
+		}
+
+		return isSuccess;
+	}
+
+	public int bookDelete(String bookId) {
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		
+		try {
+			sql = "DELETE FROM hbook WHERE bookId = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, bookId);
+			
+			deleteCount = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteCount;
 	}
 
 	

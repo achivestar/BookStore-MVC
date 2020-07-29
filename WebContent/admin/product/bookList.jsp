@@ -7,6 +7,7 @@
 <%
 	String bookId = request.getParameter("bookId");
 	String filter = request.getParameter("category");
+	String num = null;
 	ArrayList<BookVo> bookList = (ArrayList<BookVo>) request.getAttribute("bookList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int listCount = pageInfo.getListCount();
@@ -83,7 +84,9 @@
 				       <td style="vertical-align:middle">  <img src="/bookUpload/<%=bookList.get(i).getBookImage()%>" alt="" style="height:90px;width:70px" class="img-thumbnail"></td>
 				       <td style="vertical-align:middle"><a href="#addBookDialog"  data-id="<%=bookList.get(i).getBookId()%>" data-toggle="modal" class="open-AddBookDialog"><%=bookList.get(i).getBookName()%></a></td>
 				       <td style="vertical-align:middle"><%=bookList.get(i).getAuthor()%></td>
-				       <td style="vertical-align:middle" colspan="2"><a href="#" class="btn btn-warning btn-sm">수정</a>&nbsp;<a href="#" class="btn btn-danger btn-sm">삭제</a></td>
+				       <td style="vertical-align:middle" colspan="2">
+				       <a href="#modifyModal" data-id="<%=bookList.get(i).getBookId()%>" data-toggle="modal"  class="btn btn-warning btn-sm open-ModifyBookDialog">수정</a>
+				       &nbsp;<a href="#deleteModal" data-id="<%=bookList.get(i).getBookId()%>" data-toggle="modal" class="btn btn-danger btn-sm open-DeleteBookDialog" >삭제</a></td>
 				    </tr>
 						
 				   <%
@@ -175,7 +178,7 @@
   <span class="sr-only">Loading...</span>
 </div>
 <div class="modal fade " id="addBookDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -190,6 +193,45 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 도서수정모달 -->
+<div class="modal fade" id="modifyModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">도서정보수정</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-modify-body">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 도서삭제모달 -->
+<div class="modal fade" id="deleteModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">도서정보삭제</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">	
+	    <p>정말 삭제 하시겠습니까?</p>
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  id="deleteBook">삭제</button>
+ 
       </div>
     </div>
   </div>
@@ -228,8 +270,58 @@
 					
 				})
 
-		})
+		});
+		
+		$(".open-ModifyBookDialog").click(function(){
+			var myBookId = $(this).data('id'); 
+				$.ajax({
+					type: "GET", 
+					processData: false,
+			        contentType: false,
+					url: "AdminController.do?command=BookModify", 
+					data: 'myBookId='+myBookId, 
+					dataType: 'html',
+					success: function(data){
+						$('.modal-modify-body').html(data);
+					}
+					,beforeSend : function(){
+						$(".spinner-border").removeClass("displayLoding");
+					},
+					complete:function(){
+						$(".spinner-border").addClass("displayLoding");	
+					}
+					
+				})
+
+		});
+		
+		$(".open-DeleteBookDialog").click(function(){
+			var myBookId = $(this).data('id'); 
+			$("#deleteBook").click(function(){
+				$.ajax({
+					type: "GET", 
+					processData: false,
+			        contentType: false,
+					url: "AdminController.do?command=BookDelete", 
+					data: 'myBookId='+myBookId, 
+					dataType: 'text',
+					success: function(data){
+							location.href="AdminController.do?command=BookList&page=1&category=0";
+					}
+					,beforeSend : function(){
+						$(".spinner-border").removeClass("displayLoding");
+					},
+					complete:function(){
+						$(".spinner-border").addClass("displayLoding");	
+					}
+					
+				})
+			});
+		});
+		
+ 		
 	
+
 		function filterChange(obj){
 			obj.submit();
 		}

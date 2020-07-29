@@ -14,7 +14,7 @@
 				  <div class="col-md-4"><img src="../bookUpload/<%=oneBook.get(i).getBookImage() %>" alt="..." class="img-thumbnail"></div>
 				  <div class="col-md-8">
 						<p class="h2"><%=oneBook.get(i).getBookName() %></p>
-						 <p class="h4 text-secondary">책 부제</p>
+						 <p class="h4 text-secondary"><%=oneBook.get(i).getBookSubTitle() %></p>
 						<p><small class="text-muted"><%=oneBook.get(i).getAuthor() %> 저 | <%=oneBook.get(i).getPublishing() %> | <%=oneBook.get(i).getPublishDay() %></small></p>
 						<p><small class="text-muted">정   가 : <%=oneBook.get(i).getCost()%></small></p>
 						<p><small class="text-muted">판매가 :<%=oneBook.get(i).getSellingPrice()%> (<%=oneBook.get(i).getRate()%>%할인)</small></p>

@@ -22,8 +22,13 @@ public class AdminActionFactory {
 			action = new BookDetailAction();
 		}else if(command.equals("Search")) {
 			action = new SearchAction();
+		}else if(command.equals("BookModify")) {
+			action = new BookModifyAction();
+		}else if(command.equals("BookUpdateAction")) {
+			action = new BookUpdateAction();
+		}else if(command.equals("BookDelete")) {
+			action = new BookDeleteAction();
 		}
-		
 		return action;
 	}
 }

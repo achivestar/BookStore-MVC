@@ -1,11 +1,11 @@
 package com.pe.admin.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -14,15 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.pe.admin.service.BookRegistService;
+import com.pe.admin.service.BookUpdateService;
 import com.pe.admin.vo.BookVo;
-import com.pe.bluering.service.MemberModProService;
 
-public class BookRegistAction implements AdminAction {
+public class BookUpdateAction implements AdminAction {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		
 		 request.setCharacterEncoding("utf-8");
 		 response.setContentType("text/html;charset=UTF-8");
 
@@ -40,9 +39,9 @@ public class BookRegistAction implements AdminAction {
 		 
 		
 		BookVo bookvo = new BookVo();
-		String bookId = "B"+System.currentTimeMillis();
+
 		
-		bookvo.setBookId(bookId);
+		bookvo.setBookId(multi.getParameter("bookId"));
 		bookvo.setBookName(multi.getParameter("bookName"));
 		bookvo.setBookSubTitle(multi.getParameter("bookSubTitle"));
 		bookvo.setAuthor(multi.getParameter("author"));
@@ -59,7 +58,7 @@ public class BookRegistAction implements AdminAction {
 		bookvo.setCategory2(multi.getParameter("category2"));
 		bookvo.setComment(multi.getParameter("comment"));
 		
-		String customFile = multi.getParameter("bookImage");
+		String customFile = multi.getParameter("customFile");
 		 Enumeration<String> fileNames = multi.getFileNames();
 		 if(fileNames.hasMoreElements()) {
 			 String fileName = fileNames.nextElement();
@@ -68,6 +67,13 @@ public class BookRegistAction implements AdminAction {
 			 if(updateFile == null) {
 				 bookvo.setBookImage(customFile);
 			 }else {
+					File f = new File("./bookUpload/" + customFile);
+					if(f.exists()){
+						f.delete();
+						System.out.println("파일 삭제됨");
+					}else{
+						System.out.println("파일 없음");
+					}
 				 bookvo.setBookImage(updateFile);
 			 }
 		 }
@@ -91,22 +97,22 @@ public class BookRegistAction implements AdminAction {
 	 }
 	 
 	  
-	  BookRegistService  bookRes = new BookRegistService();
-	  boolean isRegitSuccess = bookRes.bookRegist(bookvo);
+	  BookUpdateService  bookUpdate= new BookUpdateService();
+	  int isModifySuccess = bookUpdate.bookUpdate(bookvo);
 		
-	  if(isRegitSuccess) {
+	  if(isModifySuccess>0) {
 			 response.setContentType("text/html;charset=UTF-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
-			 out.println("alert('상품등록성공');");
-			 out.println("location.href='./AdminController.do?command=productWriteForm'");
+			 out.println("alert('상품수정성공');");
+			 out.println("location.href='./AdminController.do?command=BookList&page=1&category=0'");
 			 out.println("</script>");
 	  }else {
 			 response.setContentType("text/html;charset=UTF-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
-			 out.println("alert('상품등록실패');");
-			 out.println("location.href='./AdminController.do?command=productWriteForm'");
+			 out.println("alert('상품수정실패');");
+			 out.println("location.href='./AdminController.do?command=BookList&page=1&category=0'");
 			 out.println("</script>");
 	  }
 

@@ -2,37 +2,37 @@
 function checkForm(){
 	    var fileNm = $("#bookImage").val();
 	
-		if(bookRegist.bookName.value==""){
+		if(bookUpdate.bookName.value==""){
 			alert("도서의 이름을 입력하세요");
-			bookRegist.bookName.focus();
+			bookUpdate.bookName.focus();
 			return false;
 		}
-		if(bookRegist.author.value==""){
+		if(bookUpdate.author.value==""){
 			alert("저자의 이름을 입력하세요");
-			bookRegist.author.focus();
+			bookUpdate.author.focus();
 			return false;
 		}
-		if(bookRegist.publishing.value==""){
+		if(bookUpdate.publishing.value==""){
 			alert("출판사를 입력하세요");
-			bookRegist.publishing.focus();
+			bookUpdate.publishing.focus();
 			return false;
 		}
 		if(bookRegist.publishDay.value==""){
 			alert("출판일자를 입력하세요");
-			bookRegist.publishDay.focus();
+			bookUpdate.publishDay.focus();
 			return false;
 		}
-		if(bookRegist.cost.value==""){
+		if(bookUpdate.cost.value==""){
 			alert("원가를 입력하세요");
-			bookRegist.cost.value="";
-			bookRegist.cost.focus();
+			bookUpdate.cost.value="";
+			bookUpdate.cost.focus();
 			return false;
 		}
 		
 		if(bookRegist.rate.value==""){
 			alert("할인율 입력하세요");
-			bookRegist.rate.value="";
-			bookRegist.rate.focus();
+			bookUpdate.rate.value="";
+			bookUpdate.rate.focus();
 			return false;
 		}
 		if(isNaN(bookRegist.rate.value)){
@@ -47,32 +47,32 @@ function checkForm(){
 			return false;
 		}
 
-		if(bookRegist.pageNum.value==""){
+		if(bookUpdate.pageNum.value==""){
 			alert("책의 페이지 수를 입력하세요");
-			bookRegist.pageNum.focus();
+			bookUpdate.pageNum.focus();
 			return false;
 		}
-		if(isNaN(bookRegist.pageNum.value)){
+		if(isNaN(bookUpdate.pageNum.value)){
 			alert("숫자만 허용합니다.");
-			bookRegist.pageNum.value="";
-			bookRegist.pageNum.focus();
+			bookUpdate.pageNum.value="";
+			bookUpdate.pageNum.focus();
 			return false;
 		}
-		if(bookRegist.weight.value==""){
+		if(bookUpdate.weight.value==""){
 			alert("책의 무게를 입력하세요");
-			bookRegist.weight.focus();
+			bookUpdate.weight.focus();
 			return false;
 		}
-		if(isNaN(bookRegist.weight.value)){
+		if(isNaN(bookUpdate.weight.value)){
 			alert("숫자만 허용합니다.");
-			bookRegist.weight.value="";
-			bookRegist.weight.focus();
+			bookUpdate.weight.value="";
+			bookUpdate.weight.focus();
 			return false;
 		}
 
-		if(bookRegist.category1.value=='none'){
+		if(bookUpdate.category1.value=='none'){
 			alert("대분류를 선택하세요");
-			bookRegist.category1.focus();
+			bookUpdate.category1.focus();
 			return false;
 		}
 		if(bookRegist.category2.value=='none'){
@@ -80,9 +80,9 @@ function checkForm(){
 			bookRegist.category2.focus();
 			return false;
 		}
-		if(bookRegist.comment.value==""){
+		if(bookUpdate.comment.value==""){
 			alert("책의 소개를 입력하세요");
-			bookRegist.comment.focus();
+			bookUpdate.comment.focus();
 			return false;
 		}
 		if (fileNm != "") {
@@ -127,14 +127,16 @@ function categoryChange(e) {
 }
 
 function numberFormat(inputNumber) {
-	 bookRegist.cost.value =  inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	bookUpdate.cost.value =  inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
+function numberFormat(inputNumber) {
+	bookUpdate.cost.value =  inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function rateCalc(rate){
 
-	var price =  parseInt( bookRegist.cost.value.replace(/,/g,""));
-	 var sellPrice = bookRegist.sellingPrice.value = (price - (price * rate)/100);
+	var price =  parseInt( bookUpdate.cost.value.replace(/,/g,""));
+	 var sellPrice = bookUpdate.sellingPrice.value = (price - (price * rate)/100);
 	 var sell = sellPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	 bookRegist.sellingPrice.value =  sell;
+	 bookUpdate.sellingPrice.value =  sell;
 	//parseInt(bookRegist.sellingPrice.value);
 }
