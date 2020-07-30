@@ -64,15 +64,24 @@ public class BookUpdateAction implements AdminAction {
 			 String updateFile = multi.getFilesystemName(fileName);
 			 
 			 if(updateFile == null) {
-				 bookvo.setBookImage(customFile);
-			 }else {
-//					File f = new File("./bookUpload/" + customFile);
+				   System.out.println(realFolder+"\\"+updateFile);
+					File f = new File(realFolder+"\\"+updateFile);
 //					if(f.exists()){
 //						f.delete();
 //						System.out.println("파일 삭제됨");
 //					}else{
 //						System.out.println("파일 없음");
-//					}
+//					}	
+				 bookvo.setBookImage(customFile);
+			 }else {
+
+				 File f = new File(realFolder+"\\"+customFile);
+				if(f.exists()){
+					f.delete();
+					System.out.println("파일 삭제됨");
+				}else{
+					System.out.println("파일 없음");
+				}	
 				 bookvo.setBookImage(updateFile);
 			 }
 		 }

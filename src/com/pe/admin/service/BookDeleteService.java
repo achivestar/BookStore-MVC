@@ -2,23 +2,31 @@ package com.pe.admin.service;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.ArrayList;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.pe.admin.vo.BookVo;
 import com.pe.bluering.dao.BookDAO;
 
 public class BookDeleteService {
 
-	public int bookDelete(String bookId) throws SQLException {
+	public int bookDelete(String bookId, HttpServletRequest request) throws SQLException {
 		int isDeleteSuccess = 0;
 
 		BookDAO bookDao = new BookDAO();
 		BookVo bookVo = new BookVo();
 		
 		bookVo = bookDao.selectOneBook(bookId);
-		String bookImg  = null;
-	
-		File f = new File("./bookUpload/" + bookImg);
+		String bookImg  = bookVo.getBookImage();
+		System.out.println(bookImg);
+		
+
+		ServletContext context = request.getServletContext();
+		String realFolder = context.getRealPath("bookUpload");
+		System.out.println(realFolder+"\\"+bookImg);
+
+		File f = new File(realFolder+"\\"+bookImg);
 		if(f.exists()){
 			f.delete();
 			System.out.println("파일 삭제됨");

@@ -22,7 +22,7 @@ public class BookDeleteAction implements AdminAction {
 		 
 		 BookDeleteService  bookDelete= new BookDeleteService();
 		
-		  int isDeleteSuccess = bookDelete.bookDelete(bookId);
+		  int isDeleteSuccess = bookDelete.bookDelete(bookId,request);
 		
 		  System.out.println("Delete Action"+isDeleteSuccess);
 		  if(isDeleteSuccess>0) {
