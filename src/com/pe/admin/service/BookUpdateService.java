@@ -14,7 +14,8 @@ public class BookUpdateService {
 		BookDAO bookDao = new BookDAO();
 		
 		isModifySuccess = bookDao.bookUpdate(bookvo);
-		System.out.println(isModifySuccess);
+		System.out.println("Update Service : " + isModifySuccess);
+
 		
 		if(isModifySuccess>0) {
 			isModifySuccess = 1;

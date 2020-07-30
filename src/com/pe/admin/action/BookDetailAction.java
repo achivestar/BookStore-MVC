@@ -26,7 +26,7 @@ public class BookDetailAction implements AdminAction {
 	  		//request.setAttribute("bookId", bookId);
 
 			BookListService oneSelectBook = new BookListService();
-			ArrayList<BookVo> oneBook = oneSelectBook.getOneBook(bookId);
+			BookVo oneBook = oneSelectBook.getOneBook(bookId);
 			
 			request.setAttribute("oneBook", oneBook);
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);

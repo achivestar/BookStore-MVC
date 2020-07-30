@@ -173,11 +173,11 @@ public class BookDAO {
 		return listCount;
 	}
 
-	public ArrayList<BookVo> selectOneBook(String bookId) {
-		ArrayList<BookVo> bookList = new ArrayList<BookVo>();
+	public BookVo selectOneBook(String bookId) {
+
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-
+		BookVo bookvo = new BookVo();
 		try {
 			String sql = "SELECT * FROM hbook WHERE bookId = ?";
 			pstmt = con.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class BookDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				BookVo bookvo = new BookVo();
+				
 				bookvo.setBookId(rs.getString("bookId"));
 				bookvo.setBookName(rs.getString("bookName"));
 				bookvo.setBookSubTitle(rs.getString("bookSubTitle"));
@@ -205,16 +205,14 @@ public class BookDAO {
 				bookvo.setBestProduct(rs.getString("bestProduct"));
 				bookvo.setTodayProduct(rs.getString("todayProduct"));
 				bookvo.setHiddenProduct(rs.getString("hiddenProduct"));
-
-				bookList.add(bookvo);
-
+				
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return bookList;
+		return bookvo;
 	}
 
 	public ArrayList<BookVo>  searchBook(String searchKey, String type) {
@@ -319,25 +317,27 @@ public class BookDAO {
 
 			con.close();
 		}
-
+		System.out.println("UPDATA DAO "+isSuccess);
 		return isSuccess;
 	}
 
-	public int bookDelete(String bookId) {
+	public int bookDelete(String bookId) throws SQLException{
 		int deleteCount = 0;
 		PreparedStatement pstmt = null;
 		String sql = null;
-		
+		System.out.println("DB"+bookId);
 		try {
 			sql = "DELETE FROM hbook WHERE bookId = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, bookId);
 			
 			deleteCount = pstmt.executeUpdate();
+			System.out.println("DAO DB "+deleteCount);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return deleteCount;
+
 	}
 
 	

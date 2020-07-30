@@ -251,6 +251,7 @@
 
 		$(".open-AddBookDialog").click(function(){
 			var myBookId = $(this).data('id'); 
+			
 				$.ajax({
 					type: "GET", 
 					processData: false,
@@ -282,6 +283,7 @@
 					data: 'myBookId='+myBookId, 
 					dataType: 'html',
 					success: function(data){
+					
 						$('.modal-modify-body').html(data);
 					}
 					,beforeSend : function(){
@@ -297,6 +299,7 @@
 		
 		$(".open-DeleteBookDialog").click(function(){
 			var myBookId = $(this).data('id'); 
+		
 			$("#deleteBook").click(function(){
 				$.ajax({
 					type: "GET", 

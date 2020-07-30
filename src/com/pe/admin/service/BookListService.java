@@ -26,8 +26,8 @@ public class BookListService {
 		return bookList;
 	}
 
-	public ArrayList<BookVo> getOneBook(String bookId) {
-		ArrayList<BookVo> bookList = null;
+	public BookVo getOneBook(String bookId) {
+		BookVo bookList = null;
 		BookDAO bookDao = new BookDAO();
 		bookList = bookDao.selectOneBook(bookId);
 		

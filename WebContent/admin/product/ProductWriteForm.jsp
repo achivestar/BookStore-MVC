@@ -114,38 +114,19 @@
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="bestProduct">베스트상품</label> <br>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-info">
-							<input type="radio" name="bestProduct" id="jb-radio-1" value="y"> 등록
-						</label>
-						<label class="btn btn-info">
-							<input type="radio" name="bestProduct" id="jb-radio-2" value="n" checked="checked"> 해제
-						</label>
-					</div>
+							<input type="radio" name="bestProduct"  value="y" > 등록
+							<input type="radio" name="bestProduct" value="n" checked> 해제
 				</div>
 				<div class="form-group col-md-4">
 					 <label for="todayProduct">오늘의상품</label><br>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-info">
-							<input type="radio" name="todayProduct" id="jb-radio-3" value="y"> 등록
-						</label>
-						<label class="btn btn-info">
-							<input type="radio" name="todayProduct" id="jb-radio-4" value="n" checked="checked"> 해제
-						</label>
-					</div>
-
+							<input type="radio" name="todayProduct"  value="y"  > 등록
+							<input type="radio" name="todayProduct"  value="n" checked> 해제
 				</div>
 				<div class="form-group col-md-4">
 					<label for="hiddenProduct">상품매진</label><br>
-					<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						<label class="btn btn-info">
-							<input type="radio" name="hiddenProduct" id="jb-radio-5" value="y"> 등록
-						</label>
-						<label class="btn btn-info">
-							<input type="radio" name="hiddenProduct" id="jb-radio-6" value="n" checked="checked"> 해제
-						</label>
-					</div>
-			</div>
+							<input type="radio" name="hiddenProduct"  value="y" > 등록
+							<input type="radio" name="hiddenProduct"  value="n"  checked> 해제	
+				</div>
 			
 		</div>
 			<button type="submit" class="btn btn-primary btn-block">등록</button>

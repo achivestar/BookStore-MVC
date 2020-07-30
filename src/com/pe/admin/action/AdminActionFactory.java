@@ -29,6 +29,8 @@ public class AdminActionFactory {
 		}else if(command.equals("BookDelete")) {
 			action = new BookDeleteAction();
 		}
+		
+		System.out.println(action);
 		return action;
 	}
 }

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import com.pe.admin.service.BookRegistService;
 import com.pe.admin.service.BookUpdateService;
 import com.pe.admin.vo.BookVo;
 
@@ -67,35 +66,23 @@ public class BookUpdateAction implements AdminAction {
 			 if(updateFile == null) {
 				 bookvo.setBookImage(customFile);
 			 }else {
-					File f = new File("./bookUpload/" + customFile);
-					if(f.exists()){
-						f.delete();
-						System.out.println("파일 삭제됨");
-					}else{
-						System.out.println("파일 없음");
-					}
+//					File f = new File("./bookUpload/" + customFile);
+//					if(f.exists()){
+//						f.delete();
+//						System.out.println("파일 삭제됨");
+//					}else{
+//						System.out.println("파일 없음");
+//					}
 				 bookvo.setBookImage(updateFile);
 			 }
 		 }
 		
-	 if(multi.getParameter("bestProduct").equals("y")) {
-		  bookvo.setBestProduct(multi.getParameter("bestProduct"));
-	 }else if(multi.getParameter("bestProduct").equals("n")) {
-		  bookvo.setBestProduct(multi.getParameter("bestProduct"));
-	 }
+
+	bookvo.setBestProduct(multi.getParameter("bestProduct"));
+	bookvo.setTodayProduct(multi.getParameter("todayProduct"));
+	bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
 	
-	 if(multi.getParameter("todayProduct").equals("y")) {
-		  bookvo.setTodayProduct(multi.getParameter("todayProduct"));
-	 }else if(multi.getParameter("todayProduct").equals("n")) {
-		 bookvo.setTodayProduct(multi.getParameter("todayProduct"));
-	 }
 	
-	 if(multi.getParameter("hiddenProduct").equals("y")) {
-		 bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
-	 }else if(multi.getParameter("hiddenProduct").equals("n")) {
-		 bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
-	 }
-	 
 	  
 	  BookUpdateService  bookUpdate= new BookUpdateService();
 	  int isModifySuccess = bookUpdate.bookUpdate(bookvo);

@@ -1,6 +1,7 @@
 package com.pe.admin.service;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.pe.admin.vo.BookVo;
@@ -8,18 +9,15 @@ import com.pe.bluering.dao.BookDAO;
 
 public class BookDeleteService {
 
-	public int bookDelete(String bookId) {
+	public int bookDelete(String bookId) throws SQLException {
 		int isDeleteSuccess = 0;
 
 		BookDAO bookDao = new BookDAO();
-		ArrayList<BookVo> bookVo = new ArrayList<BookVo>();
+		BookVo bookVo = new BookVo();
 		
 		bookVo = bookDao.selectOneBook(bookId);
 		String bookImg  = null;
-		for(int i=0; i<bookVo.size(); i++) {
-			bookImg = bookVo.get(i).getBookImage();
-			System.out.println(bookImg);
-		}
+	
 		File f = new File("./bookUpload/" + bookImg);
 		if(f.exists()){
 			f.delete();
@@ -34,7 +32,7 @@ public class BookDeleteService {
 			isDeleteSuccess = 1;
 		}
 
-		
+		System.out.println("Delete Service " +isDeleteSuccess);
 		return isDeleteSuccess;
 	}
 

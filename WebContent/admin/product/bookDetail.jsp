@@ -4,20 +4,18 @@
     pageEncoding="UTF-8"%>
 
 <%
-	ArrayList<BookVo> oneBook = (ArrayList<BookVo>) request.getAttribute("oneBook");
+	BookVo oneBook = (BookVo)request.getAttribute("oneBook");
 %>
-<%
-	for(int i=0; i<oneBook.size();i++){
-%>
+
 			<div class="container-fluid">
 				<div class="row">
-				  <div class="col-md-4"><img src="../bookUpload/<%=oneBook.get(i).getBookImage() %>" alt="..." class="img-thumbnail"></div>
+				  <div class="col-md-4"><img src="../bookUpload/<%=oneBook.getBookImage() %>" alt="..." class="img-thumbnail"></div>
 				  <div class="col-md-8">
-						<p class="h2"><%=oneBook.get(i).getBookName() %></p>
-						 <p class="h4 text-secondary"><%=oneBook.get(i).getBookSubTitle() %></p>
-						<p><small class="text-muted"><%=oneBook.get(i).getAuthor() %> 저 | <%=oneBook.get(i).getPublishing() %> | <%=oneBook.get(i).getPublishDay() %></small></p>
-						<p><small class="text-muted">정   가 : <%=oneBook.get(i).getCost()%></small></p>
-						<p><small class="text-muted">판매가 :<%=oneBook.get(i).getSellingPrice()%> (<%=oneBook.get(i).getRate()%>%할인)</small></p>
+						<p class="h2"><%=oneBook.getBookName() %></p>
+						 <p class="h4 text-secondary"><%=oneBook.getBookSubTitle() %></p>
+						<p><small class="text-muted"><%=oneBook.getAuthor() %> 저 | <%=oneBook.getPublishing() %> | <%=oneBook.getPublishDay() %></small></p>
+						<p><small class="text-muted">정   가 : <%=oneBook.getCost()%></small></p>
+						<p><small class="text-muted">판매가 :<%=oneBook.getSellingPrice()%> (<%=oneBook.getRate()%>%할인)</small></p>
 					
 				  </div>
 				</div>
@@ -29,15 +27,15 @@
 								  <tbody >
 									 <tr >
 										  <th scope="col" class="table-active" >출간일</th>
-										  <td ><%=oneBook.get(i).getPublishDay() %></td>
+										  <td ><%=oneBook.getPublishDay() %></td>
 									 </tr>	 
 									  <tr>
 										  <th scope="col"  class="table-active">쪽수, 무게, 크기</th>
-										  <td><%=oneBook.get(i).getPageNum()%>쪽 | <%=oneBook.get(i).getWeight()%>g | <%=oneBook.get(i).getSize()%></td>
+										  <td><%=oneBook.getPageNum()%>쪽 | <%=oneBook.getWeight()%>g | <%=oneBook.getSize()%></td>
 									 </tr>
 									  <tr>
 										  <th scope="col"  class="table-active">ISBN</th>
-										  <td><%=oneBook.get(i).getBookId()%></td>
+										  <td><%=oneBook.getBookId()%></td>
 									 </tr>
 								  </tbody>
 								</table>
@@ -47,7 +45,7 @@
 				<p class="h4">관련분류</p>
 				<div class="row">
 					  <div class="col-md-12">
-						 <p><%=oneBook.get(i).getCategory1()%> > <%=oneBook.get(i).getCategory2() %></p>
+						 <p><%=oneBook.getCategory1()%> > <%=oneBook.getCategory2() %></p>
 
 					  </div>
 				</div>
@@ -56,11 +54,8 @@
 				<div class="row">
 					  <div class="col-md-12">
 						 <p>
-						 	<%=oneBook.get(i).getComment()%>
+						 	<%=oneBook.getComment()%>
 						 </p>
 					  </div>
 				</div>
 			</div>
-<%
-	}
-%>

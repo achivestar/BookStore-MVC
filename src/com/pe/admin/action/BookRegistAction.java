@@ -1,4 +1,4 @@
-package com.pe.admin.action;
+ package com.pe.admin.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -71,24 +71,12 @@ public class BookRegistAction implements AdminAction {
 				 bookvo.setBookImage(updateFile);
 			 }
 		 }
-		
-	 if(multi.getParameter("bestProduct").equals("y")) {
+
+
 		  bookvo.setBestProduct(multi.getParameter("bestProduct"));
-	 }else if(multi.getParameter("bestProduct").equals("n")) {
-		  bookvo.setBestProduct(multi.getParameter("bestProduct"));
-	 }
-	
-	 if(multi.getParameter("todayProduct").equals("y")) {
 		  bookvo.setTodayProduct(multi.getParameter("todayProduct"));
-	 }else if(multi.getParameter("todayProduct").equals("n")) {
-		 bookvo.setTodayProduct(multi.getParameter("todayProduct"));
-	 }
+		  bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
 	
-	 if(multi.getParameter("hiddenProduct").equals("y")) {
-		 bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
-	 }else if(multi.getParameter("hiddenProduct").equals("n")) {
-		 bookvo.setHiddenProduct(multi.getParameter("hiddenProduct"));
-	 }
 	 
 	  
 	  BookRegistService  bookRes = new BookRegistService();
