@@ -26,7 +26,7 @@ public class BookDeleteService {
 		String realFolder = context.getRealPath("bookUpload");
 		System.out.println(realFolder+"\\"+bookImg);
 
-		File f = new File(realFolder+"\\"+bookImg);
+		File f = new File("\\"+realFolder+"\\"+bookImg);
 		if(f.exists()){
 			f.delete();
 			System.out.println("파일 삭제됨");
