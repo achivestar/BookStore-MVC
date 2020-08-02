@@ -21,18 +21,19 @@ public class BookDeleteService {
 		String bookImg  = bookVo.getBookImage();
 		System.out.println(bookImg);
 		
-
-		ServletContext context = request.getServletContext();
-		String realFolder = context.getRealPath("bookUpload");
-		System.out.println(realFolder+"\\"+bookImg);
-
-		File f = new File("\\"+realFolder+"\\"+bookImg);
+		String fileDir = "bookUpload";
+		String fileName =  bookImg;
+		String filePath = request.getRealPath(fileDir) + "/";
+		filePath += fileName;
+		File f = new File(filePath);
 		if(f.exists()){
 			f.delete();
-			System.out.println("파일 삭제됨");
-		}else{
-			System.out.println("파일 없음");
+			System.out.println("파일삭제 ");
+		}else {
+			System.out.println("파일없음");
 		}
+
+		
 		isDeleteSuccess = bookDao.bookDelete(bookId);
 		System.out.println(isDeleteSuccess);
 		

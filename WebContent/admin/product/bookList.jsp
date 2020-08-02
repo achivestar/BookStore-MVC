@@ -173,7 +173,7 @@
 		</div>
 	</main>
 
-    <!-- Modal -->	
+  <!-- 도서 상세 보기 모달 -->	
 <div class="spinner-border text-primary displayLoding" role="status"  style="position:fixed;top:50%;left:50%;">
   <span class="sr-only">Loading...</span>
 </div>
@@ -181,7 +181,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">상세보기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

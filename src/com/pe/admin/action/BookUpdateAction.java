@@ -26,7 +26,7 @@ public class BookUpdateAction implements AdminAction {
 
 
 		 
-		 String savePath = "./bookUpload";
+		 String savePath = "bookUpload";
 		 String realFolder = "";
 		 
 		 int fileSize = 5*1024*1024;
@@ -64,18 +64,21 @@ public class BookUpdateAction implements AdminAction {
 			 String updateFile = multi.getFilesystemName(fileName);
 			 
 			 if(updateFile == null) {
-				   System.out.println(realFolder+"\\"+updateFile);
 
 				 bookvo.setBookImage(customFile);
 			 }else {
 
-				 File f = new File("\\"+realFolder+"\\"+customFile);
-				if(f.exists()){
-					f.delete();
-					System.out.println("파일 삭제됨");
-				}else{
-					System.out.println("파일 없음");
-				}	
+			        String fileDir = "bookUpload";
+					String filePath = request.getRealPath(fileDir) + "/";
+					filePath += customFile;
+					File f = new File(filePath);
+					if(f.exists()){
+						f.delete();
+						System.out.println("파일삭제 ");
+					}else {
+						System.out.println("파일없음");
+					}
+
 				 bookvo.setBookImage(updateFile);
 			 }
 		 }
