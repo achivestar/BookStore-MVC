@@ -37,6 +37,7 @@
 <link href="./custom.css" rel="stylesheet">
 <link href="dashboard.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css"  href="../js/jquery-ui.css">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <script src="../js/bookRegist.js"></script>
 </head>
@@ -157,20 +158,12 @@
 		%>	
 				
 		</div>
-		<div class="col-md-4 text-left">
-			<div style="border:1px solid #ddd;padding:20px">
-				<p>현재 등록된 도서 130권</p>
-				<p>기술 30권</p>
-				<p>만화 30권</p>
-				<p>소설 20권</p>
-				<p>잡지 43권</p>
-				<p>에쎄이 17권</p>
-			</div>	
-			<br>
-			<a href="AdminController.do?command=productWriteForm"  class="btn btn-outline-primary">상품등록</a>
-			<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
-		</div>
-		</div>
+			<div class="col-md-4 text-left">
+				<jsp:include page="./chartList.jsp" />
+				<br>
+				<a href="AdminController.do?command=productWriteForm"  class="btn btn-outline-primary">상품등록</a>
+				<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
+	    	</div>
 	</main>
 
   <!-- 도서 상세 보기 모달 -->	

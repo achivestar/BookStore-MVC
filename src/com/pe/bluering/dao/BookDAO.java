@@ -340,5 +340,51 @@ public class BookDAO {
 
 	}
 
+	public ArrayList<BookVo> selectAllCountBook() {
+		ArrayList<BookVo> bookList = new ArrayList<BookVo>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		//JSONArray arr = new JSONArray();
+		try {
+			String sql = "SELECT category1, count(category1) as booksCount FROM hbook GROUP BY category1 ";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				  BookVo bookvo = new BookVo();
+				  bookvo.setCategory1(rs.getString("category1")); 
+				  bookvo.setBooksCount(rs.getInt("booksCount"));
+				  bookList.add(bookvo);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return bookList;
+	}
+
+	public int totalBookCount() {
+		int totalBookCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = null;
+		
+		try {
+			sql = "SELECT count(*) FROM hbook";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				totalBookCount = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return totalBookCount;
+	}
+
 	
 }

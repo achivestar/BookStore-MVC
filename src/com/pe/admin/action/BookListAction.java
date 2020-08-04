@@ -64,12 +64,18 @@ public class BookListAction implements AdminAction {
 			request.setAttribute("bookList", bookList);
 			request.setAttribute("filter", filter);
 
-
+			ArrayList<BookVo> bookCount = bookListService.getBooksCount();
+			request.setAttribute("bookCount", bookCount);
+			
+			int totalBookCount = bookListService.totalBookCount();
+			request.setAttribute("totalBookCount", totalBookCount);
 			
 			String url = "./product/bookList.jsp";
 		    RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+
 		 try {
 			dispatcher.forward(request, response);
+
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

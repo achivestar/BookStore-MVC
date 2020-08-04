@@ -21,9 +21,10 @@ public class BookVo {
 		private String bestProduct;
 		private String todayProduct;
 		private String hiddenProduct;
+		private int booksCount;
 		
 		
-		
+	
 		public String getBookId() {
 			return bookId;
 		}
@@ -140,4 +141,10 @@ public class BookVo {
 			this.hiddenProduct = hiddenProduct;
 		}
 		
+		public int getBooksCount() {
+			return booksCount;
+		}
+		public void setBooksCount(int booksCount) {
+			this.booksCount = booksCount;
+		}
 }

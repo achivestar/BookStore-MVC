@@ -34,6 +34,25 @@ public class BookListService {
 		return bookList;
 	}
 
+	public ArrayList<BookVo> getBooksCount() {
+		
+		ArrayList<BookVo> booksCount = null;
+		BookDAO bookDao = new BookDAO();
+		booksCount = bookDao.selectAllCountBook();
+		
+		return booksCount;
+	}
+
+
+	public int totalBookCount() {
+		
+		int totalBookCount = 0;
+		BookDAO bookDao = new BookDAO();
+		totalBookCount = bookDao.totalBookCount();
+		
+		return totalBookCount;
+	}
+
 
 
 }
