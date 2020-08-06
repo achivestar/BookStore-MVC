@@ -82,7 +82,17 @@
 					  for(int i=0; i<bookList.size();i++){
 				  %>
 				    <tr>
-				       <td style="vertical-align:middle">  <img src="/bookUpload/<%=bookList.get(i).getBookImage()%>" alt="" style="height:90px;width:70px" class="img-thumbnail"></td>
+				       <td style="vertical-align:middle"> 
+				       	<%if(bookList.get(i).getBookImage()==null){%>
+				    	   	<img src="/bookUpload/default.jpg" alt="" style="height:90px;width:70px" class="img-thumbnail">
+				       	<%
+				       		}else{
+				       	%>
+				        <img src="/bookUpload/<%=bookList.get(i).getBookImage()%>" alt="" style="height:90px;width:70px" class="img-thumbnail">
+				        <%
+				       		}
+				        %>
+				        </td>
 				       <td style="vertical-align:middle"><a href="#addBookDialog"  data-id="<%=bookList.get(i).getBookId()%>" data-toggle="modal" class="open-AddBookDialog"><%=bookList.get(i).getBookName()%></a></td>
 				       <td style="vertical-align:middle"><%=bookList.get(i).getAuthor()%></td>
 				       <td style="vertical-align:middle" colspan="2">
@@ -162,7 +172,7 @@
 				<jsp:include page="./chartList.jsp" />
 				<br>
 				<a href="AdminController.do?command=productWriteForm"  class="btn btn-outline-primary">상품등록</a>
-				<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
+				<a href="AdminController.do?command=excelDownload"  class="btn btn-outline-success">엑셀다운로드</a>
 	    	</div>
 	</main>
 

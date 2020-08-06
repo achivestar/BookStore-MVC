@@ -214,6 +214,50 @@ public class BookDAO {
 
 		return bookvo;
 	}
+	
+	public ArrayList<BookVo> selectAllBook() {
+		ArrayList<BookVo> bookList = new ArrayList<BookVo>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "SELECT * FROM hbook";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				BookVo bookvo = new BookVo();
+				bookvo.setBookId(rs.getString("bookId"));
+				bookvo.setBookName(rs.getString("bookName"));
+				bookvo.setBookSubTitle(rs.getString("bookSubTitle"));
+				bookvo.setAuthor(rs.getString("author"));
+				bookvo.setPublishing(rs.getString("publishing"));
+				bookvo.setPublishDay(rs.getString("publishDay"));
+				bookvo.setCost(rs.getString("cost"));
+				bookvo.setRate(rs.getInt("rate"));
+				bookvo.setSellingPrice(rs.getString("sellingPrice"));
+				bookvo.setPageNum(rs.getInt("pageNum"));
+				bookvo.setWeight(rs.getInt("weight"));
+				bookvo.setSize(rs.getString("size"));
+				bookvo.setCategory1(rs.getString("category1"));
+				bookvo.setCategory2(rs.getString("category2"));
+				bookvo.setComment(rs.getString("comment"));
+				bookvo.setBookImage(rs.getString("bookImage"));
+				bookvo.setBestProduct(rs.getString("bestProduct"));
+				bookvo.setTodayProduct(rs.getString("todayProduct"));
+				bookvo.setHiddenProduct(rs.getString("hiddenProduct"));
+
+				bookList.add(bookvo);
+
+				
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return bookList;
+	}
+
 
 	public ArrayList<BookVo>  searchBook(String searchKey, String type) {
 
@@ -386,5 +430,6 @@ public class BookDAO {
 		return totalBookCount;
 	}
 
+	
 	
 }

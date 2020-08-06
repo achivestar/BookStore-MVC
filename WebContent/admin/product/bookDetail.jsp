@@ -9,7 +9,18 @@
 
 			<div class="container-fluid">
 				<div class="row">
-				  <div class="col-md-4"><img src="../bookUpload/<%=oneBook.getBookImage() %>" alt="..." class="img-thumbnail"></div>
+				  <div class="col-md-4">
+				  
+					  <%if(oneBook.getBookImage()==null){%>
+				    	   	<img src="/bookUpload/default.jpg" alt="" style="height:190px;width:170px" class="img-thumbnail">
+				       	<%
+				       		}else{
+				       	%>
+				        <img src="/bookUpload/<%=oneBook.getBookImage()%>" alt="" style="height:190px;width:170px" class="img-thumbnail">
+				        <%
+				       		}
+				        %>
+				  </div>
 				  <div class="col-md-8">
 						<p class="h2"><%=oneBook.getBookName() %></p>
 						 <p class="h4 text-secondary"><%=oneBook.getBookSubTitle() %></p>

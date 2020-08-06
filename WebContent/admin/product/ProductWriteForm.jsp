@@ -141,7 +141,7 @@
 			<jsp:include page="./chartList.jsp" />
 			<br>
 			<a href="AdminController.do?command=BookList&page=1&category=0"  class="btn btn-outline-primary">상품목록</a>
-			<button type="button" class="btn btn-outline-success">엑셀다운로드</button>
+			<a href="AdminController.do?command=excelDownload"  class="btn btn-outline-success">엑셀다운로드</a>
 		</div>
 	</div>
 	</main>

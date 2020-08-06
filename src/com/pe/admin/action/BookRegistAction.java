@@ -66,6 +66,7 @@ public class BookRegistAction implements AdminAction {
 			 String updateFile = multi.getFilesystemName(fileName);
 			 
 			 if(updateFile == null) {
+				// bookvo.setBookImage("default.jpg");
 				 bookvo.setBookImage(customFile);
 			 }else {
 				 bookvo.setBookImage(updateFile);

@@ -35,6 +35,12 @@ function checkForm(){
 			bookUpdate.rate.focus();
 			return false;
 		}
+		if(bookRegist.rate.value>60){
+			alert("할인율은 60%를 넘지 못합니다.");
+			bookUpdate.rate.value="";
+			bookUpdate.rate.focus();
+			return false;
+		}
 		if(isNaN(bookRegist.rate.value)){
 			alert("숫자만 허용합니다.");
 			bookRegist.rate.value="";

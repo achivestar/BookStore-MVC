@@ -28,6 +28,8 @@ public class AdminActionFactory {
 			action = new BookUpdateAction();
 		}else if(command.equals("BookDelete")) {
 			action = new BookDeleteAction();
+		}else if(command.equals("excelDownload")) {
+			action = new ExcelDownload();
 		}
 		
 		System.out.println(action);

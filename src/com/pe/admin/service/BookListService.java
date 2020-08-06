@@ -1,6 +1,7 @@
 package com.pe.admin.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.pe.admin.vo.BookVo;
 import com.pe.bluering.dao.BookDAO;
@@ -22,6 +23,15 @@ public class BookListService {
 		ArrayList<BookVo> bookList = null;
 		BookDAO bookDao = new BookDAO();
 		bookList = bookDao.selectAllBook(page, limit, filter);
+		
+		return bookList;
+	}
+	
+	public List<BookVo> BookList() {
+		
+		ArrayList<BookVo> bookList = null;
+		BookDAO bookDao = new BookDAO();
+		bookList = bookDao.selectAllBook();
 		
 		return bookList;
 	}
@@ -52,6 +62,8 @@ public class BookListService {
 		
 		return totalBookCount;
 	}
+
+	
 
 
 
