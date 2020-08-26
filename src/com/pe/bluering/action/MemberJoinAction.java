@@ -20,10 +20,7 @@ public class MemberJoinAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
-		// joinform ���� ���� �о�� ȸ���� �������� vo ��ü�� �����ϰ�
-		//service Ŭ������ ���� ���� vo ��ü�� ������ ��
-		// service ��ü������ dao ��ü���� sql ������ �ϰ� �Ͽ� ��� ���� ��ȯ �ް�
-		// �� ��ȯ�� ������� �ٽ� action ��ü�� �����ؼ� ���� ���θ� ����Ʈ �Ѵ�.
+		
 		
 		 request.setCharacterEncoding("utf-8");
 		 response.setContentType("text/html;charset=UTF-8");

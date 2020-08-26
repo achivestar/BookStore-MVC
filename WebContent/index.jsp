@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="./css/custom.css">
    <link href="./assets/dist/css/bootstrap.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+
   </head>
   <body>
     <div class="container">
@@ -34,7 +35,7 @@
 		}
 		%>
 		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=mypage">마이페이지</a>
-		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=cart">장바구니</a>
+		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=cart&memberId=<%=id%>">장바구니</a>
 		<%
         	if(id!=null&&id.equals("admin")){%>
 		<a class="btn btn-sm fnt btn-outline-info"  role="button" href="./admin/AdminController.do?command=index" >관리자</a> 
@@ -51,10 +52,10 @@
   <div class="collapse navbar-collapse" id="navbars">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">신간도서</a>
+        <a class="nav-link" href="./portfolio2/Controller.do?command=newbook">신간도서</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="#">베스트도서</a>
+        <a class="nav-link" href="./portfolio2/Controller.do?command=bestbook">베스트도서</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="#">Event</a>
@@ -68,10 +69,11 @@
         </div>
       </li>
     </ul>
-     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-    </form>
+  	<form class="form-inline my-2 my-lg-0"  action="./portfolio2/Controller.do?command=bookSearch" method="post">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search"
+					aria-label="Search" value="" id="searchKey" name="searchKey"> 
+				<input class="btn btn-secondary my-2 my-sm-0" type="submit"  value="Search" />
+	</form>
   </div>
 </nav>
   </header>

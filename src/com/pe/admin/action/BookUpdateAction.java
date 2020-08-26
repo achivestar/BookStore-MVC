@@ -46,9 +46,9 @@ public class BookUpdateAction implements AdminAction {
 		bookvo.setAuthor(multi.getParameter("author"));
 		bookvo.setPublishing(multi.getParameter("publishing"));
 		bookvo.setPublishDay(multi.getParameter("publishDay"));
-		bookvo.setCost(multi.getParameter("cost"));
+		bookvo.setCost(Integer.parseInt(multi.getParameter("cost")));
 		bookvo.setRate(Integer.parseInt(multi.getParameter("rate")));
-		bookvo.setSellingPrice(multi.getParameter("sellingPrice"));
+		bookvo.setSellingPrice(Integer.parseInt(multi.getParameter("sellingPrice")));
 	    bookvo.setPageNum(Integer.parseInt(multi.getParameter("pageNum")));
 	    bookvo.setWeight(Integer.parseInt(multi.getParameter("weight")));
 		bookvo.setSize(multi.getParameter("size"));

@@ -55,7 +55,7 @@
 			<div class="form-row">
 				<div class="form-group col-md-4">
 					<label for="cost">원가격</label> 
-					<input type="text" class="form-control form-control-sm" id="cost" name="cost"  onBlur="numberFormat(this.value)">
+					<input type="text" class="form-control form-control-sm" id="cost" name="cost" >
 				</div>
 				<div class="form-group col-md-4">
 					<label for="rate">할인율</label> 

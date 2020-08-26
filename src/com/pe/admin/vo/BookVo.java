@@ -8,9 +8,9 @@ public class BookVo {
 		private String author;
 		private String publishing;
 		private String publishDay;
-		private String cost;
+		private int cost;
 		private int rate;
-		private String sellingPrice;
+		private int sellingPrice;
 		private int pageNum;
 		private int weight;
 		private String size;
@@ -62,10 +62,10 @@ public class BookVo {
 		public void setPublishDay(String publishDay) {
 			this.publishDay = publishDay;
 		}
-		public String getCost() {
+		public int getCost() {
 			return cost;
 		}
-		public void setCost(String cost) {
+		public void setCost(int cost) {
 			this.cost = cost;
 		}
 		public int getRate() {
@@ -74,10 +74,10 @@ public class BookVo {
 		public void setRate(int rate) {
 			this.rate = rate;
 		}
-		public String getSellingPrice() {
+		public int getSellingPrice() {
 			return sellingPrice;
 		}
-		public void setSellingPrice(String sellingPrice) {
+		public void setSellingPrice(int sellingPrice) {
 			this.sellingPrice = sellingPrice;
 		}
 		public int getPageNum() {

@@ -132,17 +132,17 @@ function categoryChange(e) {
 	}	
 }
 
-function numberFormat(inputNumber) {
+/*function numberFormat(inputNumber) {
 	bookUpdate.cost.value =  inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 function numberFormat(inputNumber) {
 	bookUpdate.cost.value =  inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+}*/
 function rateCalc(rate){
 
-	var price =  parseInt( bookUpdate.cost.value.replace(/,/g,""));
-	 var sellPrice = bookUpdate.sellingPrice.value = (price - (price * rate)/100);
-	 var sell = sellPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	 bookUpdate.sellingPrice.value =  sell;
+	var price =  bookRegist.cost.value;
+	 var sellPrice = bookRegist.sellingPrice.value = (price - (price * rate)/100);
+	// var sell = sellPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	 bookRegist.sellingPrice.value =  sellPrice;
 	//parseInt(bookRegist.sellingPrice.value);
 }

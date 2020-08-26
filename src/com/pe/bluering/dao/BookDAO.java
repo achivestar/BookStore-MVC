@@ -1,6 +1,7 @@
 package com.pe.bluering.dao;
 
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -54,9 +55,9 @@ public class BookDAO {
 			pstmt.setString(4, bookvo.getAuthor());
 			pstmt.setString(5, bookvo.getPublishing());
 			pstmt.setString(6, bookvo.getPublishDay());
-			pstmt.setString(7, bookvo.getCost());
+			pstmt.setInt(7, bookvo.getCost());
 			pstmt.setInt(8, bookvo.getRate());
-			pstmt.setString(9, bookvo.getSellingPrice());
+			pstmt.setInt(9, bookvo.getSellingPrice());
 			pstmt.setInt(10, bookvo.getPageNum());
 			pstmt.setInt(11, bookvo.getWeight());
 			pstmt.setString(12, bookvo.getSize());
@@ -116,9 +117,9 @@ public class BookDAO {
 				bookvo.setAuthor(rs.getString("author"));
 				bookvo.setPublishing(rs.getString("publishing"));
 				bookvo.setPublishDay(rs.getString("publishDay"));
-				bookvo.setCost(rs.getString("cost"));
+				bookvo.setCost(rs.getInt("cost"));
 				bookvo.setRate(rs.getInt("rate"));
-				bookvo.setSellingPrice(rs.getString("sellingPrice"));
+				bookvo.setSellingPrice(rs.getInt("sellingPrice"));
 				bookvo.setPageNum(rs.getInt("pageNum"));
 				bookvo.setSize(rs.getString("size"));
 				bookvo.setCategory1(rs.getString("category1"));
@@ -192,9 +193,9 @@ public class BookDAO {
 				bookvo.setAuthor(rs.getString("author"));
 				bookvo.setPublishing(rs.getString("publishing"));
 				bookvo.setPublishDay(rs.getString("publishDay"));
-				bookvo.setCost(rs.getString("cost"));
+				bookvo.setCost(rs.getInt("cost"));
 				bookvo.setRate(rs.getInt("rate"));
-				bookvo.setSellingPrice(rs.getString("sellingPrice"));
+				bookvo.setSellingPrice(rs.getInt("sellingPrice"));
 				bookvo.setPageNum(rs.getInt("pageNum"));
 				bookvo.setWeight(rs.getInt("weight"));
 				bookvo.setSize(rs.getString("size"));
@@ -232,9 +233,9 @@ public class BookDAO {
 				bookvo.setAuthor(rs.getString("author"));
 				bookvo.setPublishing(rs.getString("publishing"));
 				bookvo.setPublishDay(rs.getString("publishDay"));
-				bookvo.setCost(rs.getString("cost"));
+				bookvo.setCost(rs.getInt("cost"));
 				bookvo.setRate(rs.getInt("rate"));
-				bookvo.setSellingPrice(rs.getString("sellingPrice"));
+				bookvo.setSellingPrice(rs.getInt("sellingPrice"));
 				bookvo.setPageNum(rs.getInt("pageNum"));
 				bookvo.setWeight(rs.getInt("weight"));
 				bookvo.setSize(rs.getString("size"));
@@ -273,35 +274,60 @@ public class BookDAO {
 		
 			while (rs.next()) {
 				BookVo bookvo = new BookVo();
-				
-//				 JSONObject obj = new JSONObject(); 
-//				 obj.put("bookId",rs.getString("bookId"));
-//				 obj.put("bookName",rs.getString("bookName"));
-//				 obj.put("bookSubTitle",rs.getString("bookSubTitle"));
-//				 obj.put("author",rs.getString("author"));
-//				 obj.put("publishing",rs.getString("publishing"));
-//				 obj.put("publishDay",rs.getString("publishDay"));
-//				 obj.put("cost",rs.getString("cost")); obj.put("rate",rs.getInt("rate"));
-//				 obj.put("sellingPrice",rs.getString("sellingPrice"));
-//				 obj.put("pageNum",rs.getInt("pageNum"));
-//				 obj.put("size",rs.getString("size"));
-//				 obj.put("category1",rs.getString("category1"));
-//				 obj.put("category2",rs.getString("category2"));
-//				 obj.put("comment",rs.getString("comment"));
-//				 obj.put("bookImage",rs.getString("bookImage"));
-//				 obj.put("bestProduct",rs.getString("bestProduct"));
-//				 obj.put("todayProduct",rs.getString("todayProduct"));
-//				 obj.put("hiddenProduct",rs.getString("hiddenProduct"));
 
-				
 				  bookvo.setBookId(rs.getString("bookId")); //
 				  bookvo.setBookName(rs.getString("bookName")); //
 				  bookvo.setBookSubTitle(rs.getString("bookSubTitle")); //
 				  bookvo.setAuthor(rs.getString("author")); //
 				  bookvo.setPublishing(rs.getString("publishing")); //
 				  bookvo.setPublishDay(rs.getString("publishDay")); //
-				  bookvo.setCost(rs.getString("cost")); bookvo.setRate(rs.getInt("rate")); //
-				  bookvo.setSellingPrice(rs.getString("sellingPrice")); //
+				  bookvo.setCost(rs.getInt("cost"));
+				  bookvo.setRate(rs.getInt("rate")); //
+				  bookvo.setSellingPrice(rs.getInt("sellingPrice")); //
+				  bookvo.setPageNum(rs.getInt("pageNum")); //
+				  bookvo.setSize(rs.getString("size")); //
+				  bookvo.setCategory1(rs.getString("category1")); //
+				  bookvo.setCategory2(rs.getString("category2")); //
+				  bookvo.setComment(rs.getString("comment")); //
+				  bookvo.setBookImage(rs.getString("bookImage")); //
+				  bookvo.setBestProduct(rs.getString("bestProduct")); //
+				  bookvo.setTodayProduct(rs.getString("todayProduct")); //
+				  bookvo.setHiddenProduct(rs.getString("hiddenProduct")); // //
+				  bookList.add(bookvo);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return bookList;
+	}
+	
+	
+	public ArrayList<BookVo> searchBook(String searchKey) {
+		ArrayList<BookVo> bookList = new ArrayList<BookVo>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		//JSONArray arr = new JSONArray();
+		try {
+			String sql = "SELECT * FROM hbook WHERE bookName LIKE '%" + searchKey + "%' or author LIKE '%"+searchKey+"%'";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				BookVo bookvo = new BookVo();
+
+				  bookvo.setBookId(rs.getString("bookId")); //
+				  bookvo.setBookName(rs.getString("bookName")); //
+				  bookvo.setBookSubTitle(rs.getString("bookSubTitle")); //
+				  bookvo.setAuthor(rs.getString("author")); //
+				  bookvo.setPublishing(rs.getString("publishing")); //
+				  bookvo.setPublishDay(rs.getString("publishDay")); //
+				  bookvo.setCost(rs.getInt("cost")); 
+				  bookvo.setRate(rs.getInt("rate")); //
+				  bookvo.setSellingPrice(rs.getInt("sellingPrice")); //
 				  bookvo.setPageNum(rs.getInt("pageNum")); //
 				  bookvo.setSize(rs.getString("size")); //
 				  bookvo.setCategory1(rs.getString("category1")); //
@@ -339,9 +365,9 @@ public class BookDAO {
 			pstmt.setString(3, bookvo.getAuthor());
 			pstmt.setString(4, bookvo.getPublishing());
 			pstmt.setString(5, bookvo.getPublishDay());
-			pstmt.setString(6, bookvo.getCost());
+			pstmt.setInt(6, bookvo.getCost());
 			pstmt.setInt(7, bookvo.getRate());
-			pstmt.setString(8, bookvo.getSellingPrice());
+			pstmt.setInt(8, bookvo.getSellingPrice());
 			pstmt.setInt(9, bookvo.getPageNum());
 			pstmt.setInt(10, bookvo.getWeight());
 			pstmt.setString(11, bookvo.getSize());
@@ -429,6 +455,260 @@ public class BookDAO {
 		}
 		return totalBookCount;
 	}
+
+	public JSONArray getAllBookLoading() {
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		try {
+			String sql = "SELECT * FROM hbook order by bookId desc limit 20";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("bookId",rs.getString("bookId"));
+			    obj.put("bookName",rs.getString("bookName"));
+			    obj.put("bookSubTitle",rs.getString("bookSubTitle"));
+				obj.put("author",rs.getString("author"));
+				obj.put("publishing",rs.getString("publishing"));
+			    obj.put("publishDay",rs.getString("publishDay"));
+			    obj.put("cost",rs.getString("cost"));
+			    obj.put("rate",rs.getInt("rate"));
+				obj.put("sellingPrice",rs.getString("sellingPrice"));
+				obj.put("pageNum",rs.getInt("pageNum"));
+			    obj.put("size",rs.getString("size"));
+				obj.put("category1",rs.getString("category1"));
+			    obj.put("category2",rs.getString("category2"));
+			    obj.put("comment",rs.getString("comment"));
+			    obj.put("bookImage",rs.getString("bookImage"));
+			    obj.put("bestProduct",rs.getString("bestProduct"));
+			    obj.put("todayProduct",rs.getString("todayProduct"));
+			    obj.put("hiddenProduct",rs.getString("hiddenProduct"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
+		
+	}
+
+	public JSONArray getCateBookLoading(int cate) {
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		String sql = null;
+		try {
+			if(cate==1) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='IT모바일' order by bookId desc limit 20";
+			}else if(cate==2) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='소설/시/희곡' order by bookId desc limit 20";
+			}else if(cate==3) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='어린이' order by bookId desc limit 20";
+			}else if(cate==4) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='에세이' order by bookId desc limit 20";
+			}else if(cate==5) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='종교' order by bookId desc limit 20";
+			}
+			
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("bookId",rs.getString("bookId"));
+			    obj.put("bookName",rs.getString("bookName"));
+			    obj.put("bookSubTitle",rs.getString("bookSubTitle"));
+				obj.put("author",rs.getString("author"));
+				obj.put("publishing",rs.getString("publishing"));
+			    obj.put("publishDay",rs.getString("publishDay"));
+			    obj.put("cost",rs.getInt("cost"));
+			    obj.put("rate",rs.getInt("rate"));
+				obj.put("sellingPrice",rs.getInt("sellingPrice"));
+				obj.put("pageNum",rs.getInt("pageNum"));
+			    obj.put("size",rs.getString("size"));
+				obj.put("category1",rs.getString("category1"));
+			    obj.put("category2",rs.getString("category2"));
+			    obj.put("comment",rs.getString("comment"));
+			    obj.put("bookImage",rs.getString("bookImage"));
+			    obj.put("bestProduct",rs.getString("bestProduct"));
+			    obj.put("todayProduct",rs.getString("todayProduct"));
+			    obj.put("hiddenProduct",rs.getString("hiddenProduct"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
+		
+	}
+
+	public JSONArray getSearchBookLoading(String searchKey) {
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		String sql = null;
+		try {
+			sql =  "SELECT * FROM hbook WHERE bookName LIKE '%" + searchKey + "%' or author LIKE '%"+searchKey+"%'";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("bookId",rs.getString("bookId"));
+			    obj.put("bookName",rs.getString("bookName"));
+			    obj.put("bookSubTitle",rs.getString("bookSubTitle"));
+				obj.put("author",rs.getString("author"));
+				obj.put("publishing",rs.getString("publishing"));
+			    obj.put("publishDay",rs.getString("publishDay"));
+			    obj.put("cost",rs.getInt("cost"));
+			    obj.put("rate",rs.getInt("rate"));
+				obj.put("sellingPrice",rs.getInt("sellingPrice"));
+				obj.put("pageNum",rs.getInt("pageNum"));
+			    obj.put("size",rs.getString("size"));
+				obj.put("category1",rs.getString("category1"));
+			    obj.put("category2",rs.getString("category2"));
+			    obj.put("comment",rs.getString("comment"));
+			    obj.put("bookImage",rs.getString("bookImage"));
+			    obj.put("bestProduct",rs.getString("bestProduct"));
+			    obj.put("todayProduct",rs.getString("todayProduct"));
+			    obj.put("hiddenProduct",rs.getString("hiddenProduct"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
+	}
+
+	public JSONArray getAllBestBookLoading() {
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		try {
+			String sql = "SELECT * FROM hbook WHERE bestProduct = 'y' order by bookId desc limit 20";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("bookId",rs.getString("bookId"));
+			    obj.put("bookName",rs.getString("bookName"));
+			    obj.put("bookSubTitle",rs.getString("bookSubTitle"));
+				obj.put("author",rs.getString("author"));
+				obj.put("publishing",rs.getString("publishing"));
+			    obj.put("publishDay",rs.getString("publishDay"));
+			    obj.put("cost",rs.getInt("cost"));
+			    obj.put("rate",rs.getInt("rate"));
+				obj.put("sellingPrice",rs.getInt("sellingPrice"));
+				obj.put("pageNum",rs.getInt("pageNum"));
+			    obj.put("size",rs.getString("size"));
+				obj.put("category1",rs.getString("category1"));
+			    obj.put("category2",rs.getString("category2"));
+			    obj.put("comment",rs.getString("comment"));
+			    obj.put("bookImage",rs.getString("bookImage"));
+			    obj.put("bestProduct",rs.getString("bestProduct"));
+			    obj.put("todayProduct",rs.getString("todayProduct"));
+			    obj.put("hiddenProduct",rs.getString("hiddenProduct"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
+		
+	}
+
+	public JSONArray getCateBestBookLoading(int cate) {
+		
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		String sql = null;
+		try {
+			if(cate==1) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='IT모바일' and bestProduct='y' order by bookId desc limit 20";
+			}else if(cate==2) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='소설/시/희곡' and bestProduct='y'  order by bookId desc limit 20";
+			}else if(cate==3) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='어린이' and bestProduct='y'  order by bookId desc limit 20";
+			}else if(cate==4) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='에세이' and bestProduct='y'  order by bookId desc limit 20";
+			}else if(cate==5) {
+				 sql = "SELECT * FROM hbook WHERE category1 ='종교' and bestProduct='y' order by bookId desc limit 20";
+			}
+			
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("bookId",rs.getString("bookId"));
+			    obj.put("bookName",rs.getString("bookName"));
+			    obj.put("bookSubTitle",rs.getString("bookSubTitle"));
+				obj.put("author",rs.getString("author"));
+				obj.put("publishing",rs.getString("publishing"));
+			    obj.put("publishDay",rs.getString("publishDay"));
+			    obj.put("cost",rs.getInt("cost"));
+			    obj.put("rate",rs.getInt("rate"));
+				obj.put("sellingPrice",rs.getInt("sellingPrice"));
+				obj.put("pageNum",rs.getInt("pageNum"));
+			    obj.put("size",rs.getString("size"));
+				obj.put("category1",rs.getString("category1"));
+			    obj.put("category2",rs.getString("category2"));
+			    obj.put("comment",rs.getString("comment"));
+			    obj.put("bookImage",rs.getString("bookImage"));
+			    obj.put("bestProduct",rs.getString("bestProduct"));
+			    obj.put("todayProduct",rs.getString("todayProduct"));
+			    obj.put("hiddenProduct",rs.getString("hiddenProduct"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
+	}
+
+	
 
 	
 	
