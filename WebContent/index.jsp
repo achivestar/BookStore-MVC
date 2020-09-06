@@ -1,7 +1,11 @@
+<%@page import="com.pe.bluering.service.ServiceCartCount"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String id = (String)session.getAttribute("id");
+	ServiceCartCount cartcount = new ServiceCartCount();
+	int count = cartcount.getCount(id);
+	
 %>
 <!doctype html>
 <html lang="ko">
@@ -29,13 +33,15 @@
 		<%
 		}else{
 		%>
+		
 		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=logout">로그아웃</a>
 		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=memberModify">회원수정</a>
 		<%
 		}
 		%>
 		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=mypage">마이페이지</a>
-		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=cart&memberId=<%=id%>">장바구니</a>
+		<a class="btn btn-sm fnt" href="./portfolio2/Controller.do?command=cart&memberId=<%=id%>">장바구니
+			<%if(id!=null){ %><span class="badge badge-primary"><%=count %></span><%} %></a>
 		<%
         	if(id!=null&&id.equals("admin")){%>
 		<a class="btn btn-sm fnt btn-outline-info"  role="button" href="./admin/AdminController.do?command=index" >관리자</a> 

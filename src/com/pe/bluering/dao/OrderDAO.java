@@ -40,50 +40,20 @@ public class OrderDAO {
 		}
 	}
 
-	public int addOrder(CartVo cartOneList, MemberVO oneMember) throws SQLException {
-		System.out.println("Order DB");
-		PreparedStatement pstmt = null;
-		int insertCount = 0;
-		long order_id = System.currentTimeMillis();
-		Date time = new Date();
-		SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
-		String now = format.format(time);
-		String addr = oneMember.getAddr1()+" "+oneMember.getAddr2();
-		try {
-			String sql = "INSERT INTO orders (order_id,member_id,product_id,book_title,price,amount,book_img,buy_date,deliveryTel,deliveryAddr)";
-			sql+= " values (?,?,?,?,?,?,?,?,?,?)";
-			
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, (int) order_id);
-			pstmt.setString(2, oneMember.getId());
-			pstmt.setString(3, cartOneList.getProductId());
-			pstmt.setString(4, cartOneList.getBookName());
-			pstmt.setInt(5, cartOneList.getBookPrice());
-			pstmt.setInt(6,cartOneList.getAmount());
-			pstmt.setString(7, cartOneList.getBookImg());
-			pstmt.setString(8,now);
-			pstmt.setString(9, oneMember.getPhone());
-			pstmt.setString(10, addr);
-		
-			insertCount = pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-
-			con.close();
-		}
-
-		return insertCount;
-	}
 
 	public ArrayList<OrderVo> selectAllOrder(String memberId) {
 		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+		Date time = new Date();
+				
+		String now = format.format(time);
 		try {
-			String sql = "SELECT * FROM orders WHERE member_Id = ?";
+			String sql = "SELECT * FROM orders WHERE member_Id = ? and buy_date = ? order by buy_date";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberId);
+			pstmt.setString(2,now );
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -109,6 +79,99 @@ public class OrderDAO {
 		}
 		return orderList;
 	}
+
+	public int addOrder(String memberId, ArrayList<OrderVo> orderList, int availPoint, int addPoint) throws SQLException {
+		System.out.println("Order DB");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int point = 0;
+		int insertCount = 0;
+		try {
+			for(int i=0; i<orderList.size();i++) {
+			String sql = "INSERT INTO orders (order_id,cart_id,member_id,product_id,book_title,price,amount,book_img,buy_date,deliveryTel,deliveryAddr,message)";
+			sql+= " values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, orderList.get(i).getOrder_id());
+			pstmt.setInt(2, orderList.get(i).getCart_id());
+			pstmt.setString(3, orderList.get(i).getMember_id());
+			pstmt.setString(4, orderList.get(i).getProduct_id());
+			pstmt.setString(5, orderList.get(i).getBook_title());
+			pstmt.setInt(6, orderList.get(i).getPrice());
+			pstmt.setInt(7, orderList.get(i).getAmount());
+			pstmt.setString(8, orderList.get(i).getBook_img());
+			pstmt.setString(9, orderList.get(i).getBuy_date());
+			pstmt.setString(10, orderList.get(i).getDeliveryTel());
+			pstmt.setString(11, orderList.get(i).getDeliveryAddr());
+			pstmt.setString(12, orderList.get(i).getMessage());
+			insertCount = pstmt.executeUpdate();
+			pstmt = null;
+			};
+			
+			String pointSql = "SELECT point FROM hmember WHERE id = ?";
+			pstmt = con.prepareStatement(pointSql);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				point = rs.getInt("point");
+			}
+			pstmt = null;
+			String sqlMember = "UPDATE hmember SET point = ? WHERE id  = ?";
+			System.out.println("availPoint" + availPoint);
+			System.out.println("point " + point);
+			pstmt = con.prepareStatement(sqlMember);
+			pstmt.setInt(1, point-availPoint);
+			pstmt.setString(2, memberId);
+			pstmt.executeUpdate();
+			
+			pstmt = null;
+			
+			String pointSql2 = "SELECT point FROM hmember WHERE id = ?";
+			pstmt = con.prepareStatement(pointSql2);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				point = rs.getInt("point");
+			}
+			
+			
+			String sqlMember2 = "UPDATE hmember SET point = ? WHERE id  = ?";
+			System.out.println("availPoint" + availPoint);
+			System.out.println("addPoint " + addPoint);
+			pstmt = con.prepareStatement(sqlMember2);
+			pstmt.setInt(1,point+addPoint);
+			pstmt.setString(2, memberId);
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			con.close();
+		}
+
+		return insertCount;
+	}
+
+
+	public void modifyOrder(int[] cart_id) throws SQLException {
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			for(int i=0; i<cart_id.length;i++) {
+				String sql = "UPDATE cart SET state=1 WHERE cid = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1,cart_id[i]);
+				pstmt.executeUpdate();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			con.close();
+		}
+
+	}
+
 	
 	
 }

@@ -3,6 +3,7 @@ package com.pe.bluering.vo;
 public class OrderVo {
 
 	private int order_id;
+	private int cart_id;
 	private String member_id;
 	private String product_id;
 	private String book_title;
@@ -19,6 +20,13 @@ public class OrderVo {
 	}
 	public void setOrder_id(int order_id) {
 		this.order_id = order_id;
+	}
+	
+	public int getCart_id() {
+		return cart_id;
+	}
+	public void setCart_id(int cart_id) {
+		this.cart_id = cart_id;
 	}
 	public String getMember_id() {
 		return member_id;

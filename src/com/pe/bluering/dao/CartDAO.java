@@ -75,7 +75,7 @@ public class CartDAO {
 		String sql = null;
 
 		try {
-			sql = "SELECT * FROM cart WHERE memberId = ?";
+			sql = "SELECT * FROM cart WHERE memberId = ? and state = 0";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			rs = pstmt.executeQuery();
@@ -84,6 +84,7 @@ public class CartDAO {
 				CartVo cartvo = new CartVo();
 				cartvo.setCid(rs.getInt("cid"));
 				cartvo.setMemberId(memberId);
+				cartvo.setProductId(rs.getString("productId"));
 				cartvo.setBookName(rs.getString("bookName"));
 				cartvo.setBookImg(rs.getString("bookImg"));
 				cartvo.setBookPrice(rs.getInt("bookPrice"));
@@ -168,7 +169,7 @@ public class CartDAO {
 		String sql = null;
 		CartVo cartvo = new CartVo();
 		try {
-			sql = "SELECT * FROM cart WHERE cid = ?";
+			sql = "SELECT * FROM cart WHERE cid = ? ";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, cart_id);
 			rs = pstmt.executeQuery();
@@ -190,6 +191,82 @@ public class CartDAO {
 		return cartvo;
 	}
 
+
+	public int getCount(String id) {
+	
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int count = 0;
+		try {
+			sql = "SELECT count(*) as count FROM cart WHERE memberid = ? and state = 0";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				 count = rs.getInt("count");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+
+
+	public int getCartCount(String memberId, String bookNum) {
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		String sql = null;
+		int count = 0;
+		try {
+			sql = "SELECT count(productId) as count FROM cart WHERE memberid = ? and productId = ? and state = 0";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, bookNum);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				 count = rs.getInt("count");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+
+
+	public int modifyCart(String memberId, int bookNum, String bookId) {
+		PreparedStatement pstmt = null;
+		int modifyCount = 0;
+
+		try {
+			String sql = "UPDATE cart SET amount = amount+? WHERE productId = ? and memberId = ?";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bookNum);
+			pstmt.setString(2,bookId);
+			pstmt.setString(3, memberId);
+			modifyCount = pstmt.executeUpdate();
+			System.out.println(modifyCount);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return modifyCount;
+	}
 
 	
 	

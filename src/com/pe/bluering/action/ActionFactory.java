@@ -46,7 +46,7 @@ public class ActionFactory {
 		}else if(command.equals("bookSearch")){
 			action = new bookSearch();
 		}else if(command.equals("bestbook")){
-			action = new BestBook();
+			action = new BestBook(); 
 		}else if(command.equals("bookBestLoading")){
 			action = new BookBestLoading();
 		}else if(command.equals("bookBestCateLoading")){
@@ -59,6 +59,8 @@ public class ActionFactory {
 			action = new BookOrder();
 		}else if(command.equals("cartUpdate")){
 			action = new CartUpdate();
+		}else if(command.equals("addCartModify")){
+			action = new addCartModify();
 		}else if(command.equals("cartDelete")){
 			action = new CartDelete();
 		}else if(command.equals("addOrder")){
@@ -67,6 +69,8 @@ public class ActionFactory {
 			action = new OrderList();
 		}else if(command.equals("addOrders")){
 			action = new AddOrders();
+		}else if(command.equals("orderSuccess")){
+			action = new OrderSucess();
 		}else if(command.equals("index")) {
 			action = new Index();
 		}

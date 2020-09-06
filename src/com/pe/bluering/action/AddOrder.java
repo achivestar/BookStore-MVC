@@ -30,6 +30,8 @@ public class AddOrder implements Action {
 		System.out.println(cart_id);
 		String memberId = request.getParameter("memberId");
 		System.out.println(memberId);
+		int point = Integer.parseInt(request.getParameter("point"));
+		System.out.println(point);
 		
 	
 		
@@ -37,10 +39,12 @@ public class AddOrder implements Action {
 		CartVo cartOneList = orderService.getOneCartList(cart_id);
 		MemberChoiceService memberService = new MemberChoiceService();
 		MemberVO oneMember = memberService.getOneMember(memberId);
+
 		
 		HttpSession psession = request.getSession();
 		psession.removeAttribute("cartAllList");
 		psession.setAttribute("cartOneList", cartOneList);
+		psession.setAttribute("point", point);
 		HttpSession msession = request.getSession();
 		msession.setAttribute("oneMember", oneMember);
 

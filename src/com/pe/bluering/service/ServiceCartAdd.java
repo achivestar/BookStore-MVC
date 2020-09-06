@@ -34,4 +34,18 @@ public class ServiceCartAdd {
 		return cartList;
 	}
 
+	public int getCount(String memberId, String bookNum) {
+		CartDAO cartDao = new CartDAO();
+		int count = cartDao.getCartCount(memberId,bookNum);
+		return count;
+	}
+
+	public int modifyCart(String memberId, int bookNum, String bookId) {
+		int successCount = 0;
+		CartDAO cartDao = new CartDAO();
+		successCount = cartDao.modifyCart(memberId,bookNum,bookId);
+		
+		return successCount;
+	}
+
 }

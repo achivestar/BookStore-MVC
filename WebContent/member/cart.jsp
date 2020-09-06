@@ -33,13 +33,18 @@
    <link href="../assets/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-   
+<style>
+	.displayLoding{
+		display:none;
+	}
+</style>	
 <title>Insert title here</title>
 </head>
 <body>
    <div class="container">
  <jsp:include page="/top.jsp" /> 
  <main>
+
  	 <h2>장바구니</h2>    
 			<div class="col-lg-12 row">
 				<div class="col-md-10 col-lg-10" style="padding-top:20px;width:100%;margin:0 auto;border:1px solid #dddd">
@@ -74,7 +79,7 @@
 														     if(cartList.size()!=0){
 					 											 for(int i=0; i<cartList.size();i++){
 					 												total+=(cartList.get(i).getBookPrice()*cartList.get(i).getAmount());
-					 											
+					 												finalTotal = cartList.get(i).getBookPrice()*cartList.get(i).getAmount();
 				 											 %>
 															<tr>
 															  <th class="align-middle"><img src="<%=cartList.get(i).getBookImg() %>" alt=".." class="img-thumbnail align-middle " style="width:40px;height:58px">&nbsp; <%=cartList.get(i).getBookName() %></th>
@@ -83,9 +88,10 @@
 															    <input type="text"  value="<%=cartList.get(i).getAmount() %>" name="amount"  id="amount<%=i%>" size="2" class="text-center" style="border:1px solid #eee;margin-bottom:3px"/><br>
 															    <input type="hidden" name="memberId"  id="memberId" value="<%=id %>" />
 															    <input type="hidden" name="checked"  value="<%=cartList.get(i).getCid() %>" />
+															    <input type="hidden" name="cart_id"  value="<%=cartList.get(i).getCid() %>" />
 															    <a name="<%=cartList.get(i).getCid() %>,<%=i %>"  class="btn btn-link btn-sm btn-warning" onclick="editAmout(this)">변경</a>
 															    <a name="<%=cartList.get(i).getCid() %>"  class="btn btn-link btn-sm btn-danger" onclick="delAmout(this)">삭제</a></td>
-															   <td class="text-center align-middle"><a href="#none"  name="<%=cartList.get(i).getCid()%>,<%=id %>" class="btn btn-primary btn-sm" onclick="order(this)">주문</a><br>
+															   <td class="text-center align-middle"><a href="#none"  name="<%=cartList.get(i).getCid()%>,<%=id %>,<%=(cartList.get(i).getBookPrice()*cartList.get(i).getAmount()*3)/100%>" class="btn btn-primary btn-sm" onclick="order(this)">주문</a><br>
 															    </td>
 															</tr>
 																<%
@@ -120,17 +126,18 @@
 								<div class="card bg-light">
 									  <div class="card-header text-center">주문금액정보 </div>
 									  <div class="card-body">
-											<p class="text-center">총 상품금액  <%=total %>원 </p>
+											<p class="text-center">상품금액  <%=total %>원 </p>
 											<p class="text-center"> 
 											<svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 												  <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
 												  <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
 												</svg> </p>
-											<p class="text-center">총 추가금액  <%=addPrice %>원 </p>
+											<p class="text-center">추가금액  <%=addPrice %>원 </p>
 											<hr>
 											<p  class="text-center" style="font-size:20px">최종 결제금액 <span class="text-info"><%=finalTotal %>원</span></p>  
 											<hr>
-											<p class="text-center">적립 포인트 <span class="text-info"><%=point %>P</span></p>  
+											<input type="hidden" name="point" id="point" value="<%=point %>" />
+
 									 </div>
 							  </div>
 						 </div>
@@ -145,7 +152,9 @@
 				 </div>
 			</div>
 		</div>
-		
+		<div class="spinner-border text-primary displayLoding" role="status"  style="position:fixed;top:50%;left:50%;">
+ 			 <span class="sr-only">Loading...</span>
+		</div>
  </main>
 <jsp:include page="/bottom.jsp" /> 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -153,14 +162,16 @@
 <script src="../assets/dist/js/bootstrap.bundle.js"></script>
 <script>
 	function allOrder(){
-		var arr = [];
+		//var arr = [];
 		 var memberId = $("#memberId").val();
-		/* $('input[name="checked"]').each(function(i){
-				arr.push($(this).val());	
-				console.log(arr[i]);
-		}); */
+		 var point = $("#point").val();
+		/*  var cart_id =$("[name='cart_id']").each(function(){
+			 arr.push($(this).val());
+		 }) */
 		var objParam = {
-			'memberId':memberId
+			'memberId':memberId,
+			'point':point
+		//	'cart_id':arr
 		};		
 		$.ajax({
 			type : "POST",
@@ -168,8 +179,12 @@
 			url : "./Controller.do?command=addOrders",
 		    data : objParam,
 			success : function(data){
-				alert("ordersss Success");
 			    location.href="./Controller.do?command=orderList";
+			},beforeSend : function(){
+				$(".spinner-border").removeClass("displayLoding");
+			},
+			complete:function(){
+				$(".spinner-border").addClass("displayLoding");	
 			}
 		})
 		
@@ -179,10 +194,11 @@
 		var cart_data = data.split(",");
 	    var memberId = $("#memberId").val();
 	    var cart_id = cart_data[0];
-	  alert(cart_id+","+memberId);
+	    var addpoint = cart_data[2];
 		var query = {
 				memberId:memberId,
-				cart_id:cart_id
+				cart_id:cart_id,
+				point:addpoint
 		};
 		
 		$.ajax({
@@ -190,8 +206,12 @@
 			url : "./Controller.do?command=addOrder",
 		    data : query,
 			success : function(data){
-				alert("order Success");
 			    location.href="./Controller.do?command=orderList";
+			},beforeSend : function(){
+				$(".spinner-border").removeClass("displayLoding");
+			},
+			complete:function(){
+				$(".spinner-border").addClass("displayLoding");	
 			}
 		})
 		
@@ -207,8 +227,12 @@
 			url : "./Controller.do?command=cartDelete",
 		   data : query,
 			success : function(data){
-				alert("삭제되었습니다");
 			    location.href="./Controller.do?command=cart&memberId="+memberId;
+			},beforeSend : function(){
+				$(".spinner-border").removeClass("displayLoding");
+			},
+			complete:function(){
+				$(".spinner-border").addClass("displayLoding");	
 			}
 		})
 		
@@ -233,8 +257,11 @@
 				url : "./Controller.do?command=cartUpdate",
 			   data : query,
 				success : function(data){
-					alert("장바구니가 수정되었습니다");
 				    location.href="./Controller.do?command=cart&memberId="+memberId;
+				},beforeSend : function(){
+					$(".spinner-border").removeClass("displayLoding");
+				},complete:function(){
+					$(".spinner-border").addClass("displayLoding");	
 				}
 			})
 		}

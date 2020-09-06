@@ -23,7 +23,9 @@ public class AddOrders implements Action {
 			System.out.println("다중 orders");
 			//String [] select =request.getParameterValues("orders");
 			String memberId = request.getParameter("memberId");
+			int point = Integer.parseInt(request.getParameter("point"));
 			System.out.println(memberId);
+			System.out.println("카트로 부터 넘어온 point " + point);
 			
 			//int [] choice = new int[select.length];
 			//for(int i=0; i<6;i++) {
@@ -39,6 +41,7 @@ public class AddOrders implements Action {
 			HttpSession psession = request.getSession();
 			psession.removeAttribute("cartOneList");
 			psession.setAttribute("cartAllList", cartAllList);
+			psession.setAttribute("point", point);
 			HttpSession msession = request.getSession();
 			msession.setAttribute("oneMember", oneMember);
 

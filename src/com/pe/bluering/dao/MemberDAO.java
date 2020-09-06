@@ -152,6 +152,7 @@ public class MemberDAO {
 				mvo.setUseyn(rs.getString("useyn"));
 				mvo.setProfileimg(rs.getString("profileimg"));
 				mvo.setLev(rs.getInt("lev"));
+				mvo.setPoint(rs.getInt("point"));
 				mvo.setIndate(rs.getString("indate"));
 			}
 			

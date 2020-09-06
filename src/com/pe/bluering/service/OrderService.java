@@ -22,15 +22,6 @@ public class OrderService {
 
 
 
-	public int insertOneOrder(CartVo cartOneList, MemberVO oneMember) throws SQLException {
-		int successCount = 0;
-		OrderDAO orderDao = new OrderDAO();
-		successCount = orderDao.addOrder(cartOneList,oneMember);
-		
-		return successCount;
-	}
-
-
 
 	public ArrayList<OrderVo> selectOrderList(String memberId) {
 		OrderDAO orderDao = new OrderDAO();
@@ -45,6 +36,24 @@ public class OrderService {
 		CartDAO cartDao = new CartDAO();
 		ArrayList<CartVo> cartList = cartDao.selectCart(memberId);
 		return cartList;
+	}
+
+
+
+	public int insertOneOrder(String memberId, ArrayList<OrderVo> orderList,int availPoint, int point) throws SQLException {
+		int successCount = 0;
+		OrderDAO orderDao = new OrderDAO();
+		successCount = orderDao.addOrder(memberId,orderList,availPoint,point);
+		
+		return successCount;
+	}
+
+
+
+
+	public void modifyCart(int[] cart_id) throws SQLException {
+		OrderDAO orderDao = new OrderDAO();
+		orderDao.modifyOrder(cart_id);
 	}
 
 }
