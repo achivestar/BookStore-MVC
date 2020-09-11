@@ -101,6 +101,7 @@
         			}else{
         				img = obj[i].bookImage;
         			}
+
         			html += "<div class='col mb-4'>";
         			html += "<div class='card'>";
         			html += "<img src='/bookUpload/"+img+"' class='card-img-top' alt='' />";

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.pe.admin.vo.BookVo;
 import com.pe.bluering.vo.CartVo;
 import com.pe.bluering.vo.MemberVO;
@@ -51,6 +54,7 @@ public class OrderDAO {
 		String now = format.format(time);
 		try {
 			String sql = "SELECT * FROM orders WHERE member_Id = ? and buy_date = ? order by buy_date";
+			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2,now );
@@ -170,6 +174,94 @@ public class OrderDAO {
 			con.close();
 		}
 
+	}
+
+
+	public ArrayList<OrderVo> periodOrder(String memberId) {
+		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd");
+		Date time = new Date();
+				
+		String now = format.format(time);
+		try {
+			String sql = "SELECT * FROM orders WHERE member_Id = ?  order by buy_date desc limit 5 ";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				OrderVo orderVo = new OrderVo();
+				orderVo.setOrder_id(rs.getInt("order_id"));
+				orderVo.setMember_id(rs.getString("member_id"));
+				orderVo.setProduct_id(rs.getString("product_id"));
+				orderVo.setBook_title(rs.getString("book_title"));
+				orderVo.setPrice(rs.getInt("price"));
+				orderVo.setAmount(rs.getInt("amount"));
+				orderVo.setBook_img(rs.getString("book_img"));
+				orderVo.setBuy_date(rs.getString("buy_date"));
+				orderVo.setDeliveryTel(rs.getString("deliveryTel"));
+				orderVo.setDeliveryAddr(rs.getString("deliveryAddr"));
+				orderVo.setMessage(rs.getString("message"));
+				orderVo.setState(rs.getString("state"));
+				orderList.add(orderVo);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return orderList;
+	}
+
+
+	public JSONArray getOrderBookLoading(int cate) {
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		String sql = null;
+		try {
+			if(cate==1) {
+				 sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-7 DAY) ORDER BY buy_date desc";
+			}else if(cate==2) {
+				 sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-3 MONTH) ORDER BY buy_date desc";
+			}else if(cate==3) {
+				 sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-6 MONTH) ORDER BY buy_date desc"; 
+			}
+			
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("order_id",rs.getInt("order_id"));
+			    obj.put("cart_id",rs.getInt("cart_id"));
+			    obj.put("member_id",rs.getString("member_id"));
+				obj.put("product_id",rs.getString("product_id"));
+				obj.put("book_title",rs.getString("book_title"));
+			    obj.put("price",rs.getInt("price"));
+			    obj.put("amount",rs.getInt("amount"));
+			    obj.put("book_img",rs.getString("book_img"));
+				obj.put("buy_date",rs.getString("buy_date"));
+				obj.put("deliveryTel",rs.getString("deliveryTel"));
+			    obj.put("deliveryAddr",rs.getString("deliveryAddr"));
+				obj.put("message",rs.getString("message"));
+			    obj.put("state",rs.getString("state"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
 	}
 
 	

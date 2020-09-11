@@ -69,6 +69,8 @@ public class ActionFactory {
 			action = new OrderList();
 		}else if(command.equals("addOrders")){
 			action = new AddOrders();
+		}else if(command.equals("bookOrderLoading")){
+			action = new bookOrderLoading();
 		}else if(command.equals("orderSuccess")){
 			action = new OrderSucess();
 		}else if(command.equals("index")) {
