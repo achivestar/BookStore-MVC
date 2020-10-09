@@ -10,18 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
 
-import com.pe.bluering.dao.BookDAO;
 import com.pe.bluering.dao.OrderDAO;
 
-public class bookOrderLoading implements Action {
+public class bookOrderPeriodLoading implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		int cate = Integer.parseInt(request.getParameter("category"));
+		
+		String sdate = request.getParameter("sdate");
+		String edate = request.getParameter("edate");
+		System.out.println(sdate+","+edate);
+		
 	    OrderDAO orderdao = new OrderDAO();
-	    JSONArray arr = orderdao.getOrderBookLoading(cate);
-		System.out.println("Loading :"+arr);
+	    JSONArray arr = orderdao.getOrderBookLoading(sdate,edate);
 		if(arr != null) {
 			PrintWriter out ;
 			try {

@@ -70,8 +70,8 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">고객센터</a>
         <div class="dropdown-menu" aria-labelledby="dropdown04">
-          <a class="dropdown-item" href="#">QnA</a>
-          <a class="dropdown-item" href="#">문의게시판</a>
+          <a class="dropdown-item" href="./portfolio2/Controller.do?command=faq">FAQ</a> 
+		  <a class="dropdown-item" href="./portfolio2/Controller.do?command=qna">문의하기</a>
         </div>
       </li>
     </ul>

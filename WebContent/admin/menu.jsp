@@ -79,32 +79,20 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
-              <span data-feather="bar-chart-2"></span>
-              Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
               <span data-feather="command"></span>
 				Event
             </a>
           </li>
 		   <li class="nav-item">
             <a class="nav-link" href="#">
-              <span data-feather="gift"></span>
-               Coupon
-            </a>
-          </li>
-		   <li class="nav-item">
-            <a class="nav-link" href="#">
               <span data-feather="package"></span>
-               Popup / Banner
+                Banner
             </a>
           </li>
 		   <li class="nav-item">
-            <a class="nav-link" href="#">
+             <a class="nav-link  <%if(url.equals("faqForm")){%><%=active %><%}%>" href="AdminController.do?command=FaqForm">
               <span data-feather="mic"></span>
-              Q&A
+         		FAQ / Q&A
             </a>
           </li>
         </ul>

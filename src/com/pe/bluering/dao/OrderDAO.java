@@ -186,7 +186,7 @@ public class OrderDAO {
 				
 		String now = format.format(time);
 		try {
-			String sql = "SELECT * FROM orders WHERE member_Id = ?  order by buy_date desc limit 5 ";
+			String sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-7 DAY)  and member_Id = ?  order by buy_date desc ";
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, memberId);
@@ -224,7 +224,7 @@ public class OrderDAO {
 		String sql = null;
 		try {
 			if(cate==1) {
-				 sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-7 DAY) ORDER BY buy_date desc";
+				 sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-1 MONTH) ORDER BY buy_date desc";
 			}else if(cate==2) {
 				 sql = "SELECT * FROM orders WHERE buy_date >= DATE_ADD(NOW(),INTERVAL-3 MONTH) ORDER BY buy_date desc";
 			}else if(cate==3) {
@@ -233,6 +233,49 @@ public class OrderDAO {
 			
 			System.out.println(sql);
 			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+		
+			while (rs.next()) {
+				 JSONObject obj = new JSONObject(); 
+			    obj.put("order_id",rs.getInt("order_id"));
+			    obj.put("cart_id",rs.getInt("cart_id"));
+			    obj.put("member_id",rs.getString("member_id"));
+				obj.put("product_id",rs.getString("product_id"));
+				obj.put("book_title",rs.getString("book_title"));
+			    obj.put("price",rs.getInt("price"));
+			    obj.put("amount",rs.getInt("amount"));
+			    obj.put("book_img",rs.getString("book_img"));
+				obj.put("buy_date",rs.getString("buy_date"));
+				obj.put("deliveryTel",rs.getString("deliveryTel"));
+			    obj.put("deliveryAddr",rs.getString("deliveryAddr"));
+				obj.put("message",rs.getString("message"));
+			    obj.put("state",rs.getString("state"));
+
+			    if(obj != null) 
+			    	arr.add(obj);
+			}
+			
+			//System.out.println(arr);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return arr;
+	}
+
+
+	public JSONArray getOrderBookLoading(String sdate, String edate) {
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		JSONArray arr = new JSONArray();
+		String sql = null;
+		try {
+		    sql = "SELECT * FROM orders WHERE buy_date BETWEEN ? AND ? ORDER BY buy_date desc";
+			System.out.println(sql);
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, sdate);
+			pstmt.setString(2, edate);
 			rs = pstmt.executeQuery();
 		
 			while (rs.next()) {

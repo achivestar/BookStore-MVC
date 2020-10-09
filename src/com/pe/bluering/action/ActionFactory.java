@@ -71,8 +71,16 @@ public class ActionFactory {
 			action = new AddOrders();
 		}else if(command.equals("bookOrderLoading")){
 			action = new bookOrderLoading();
+		}else if(command.equals("bookOrderPeriodLoading")){
+			action = new bookOrderPeriodLoading();
 		}else if(command.equals("orderSuccess")){
 			action = new OrderSucess();
+		}else if(command.equals("faq")){
+			action = new Faq();
+		}else if(command.equals("qna")){
+			action = new Qna();
+		}else if(command.equals("qnaRegistAction")){
+			action = new QnaRegistAction();
 		}else if(command.equals("index")) {
 			action = new Index();
 		}

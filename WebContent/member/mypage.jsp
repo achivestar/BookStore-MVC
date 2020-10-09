@@ -172,18 +172,19 @@
 								  <div class="card-header">최근 주문한 내역</div>
 								  <div class="card-body">
 								    	 <div class="btn-group  btn-group-md" role="group" aria-label="Basic example">
-										   <button type="button" class="btn btn-info"  onclick="getOrderBook(1)">일주일</button>
+										   <button type="button" class="btn btn-info"  onclick="getOrderBook(1)">1개월</button>
 										   <button type="button" class="btn btn-info"  onclick="getOrderBook(2)">3개월</button>
 										   <button type="button" class="btn btn-info"  onclick="getOrderBook(3)">6개월</button>
 										   </div>
+										
 										   <div class="btn-group  btn-group-md" role="group" aria-label="Basic example">
-										   <form class="form-inline">
-										   <input type="text" id="sdate"  value=""  name="sdate" class="form-control"  size="14"> ~ <input type="text" id="edate"  value="" name="edate" class="form-control" size="14">
-										    &nbsp;<button type="submit" class="btn btn-primary">기간검색</button>
-										    </form>
+										      <form class="form-inline">
+										   <input type="text" id="sdate"  value=""  name="sdate"  size="14" class="form-control"> ~ <input type="text" id="edate"  value="" name="edate" size="14" class="form-control">
+										    &nbsp;<button type="button" class="btn btn-primary" onclick="searchPeriod()">기간검색</button>
+										    	</form>
 										    </div>
 										
-																				<br><br>
+										<br><br>
 										
 								  		<table class="table table-hover" >
 														  <thead>
@@ -196,6 +197,7 @@
 														  </thead>
 														  <tbody  id="res">
 														      <%
+														      if(orderList.size() >0){
 																 	for(int i=0; i<orderList.size();i++){
 																 		String orderDay = orderList.get(i).getBuy_date(); 
 																 		String date[] = orderDay.split(" ");
@@ -208,6 +210,13 @@
 															</tr>
 														 <%
  																	}
+														      }else{
+ 														%>
+ 														<tr>
+ 															<td colspan="4" class="align-middle text-center">최근 1주일간 구매 내역이 없습니다.</td>
+ 														</tr>
+ 														<%
+														      }
  														%>
 														  </tbody>
 														</table>
@@ -334,11 +343,50 @@
 			}
 			//var date = yy+"-"+mm+"-"+dd;
 			var edate = document.getElementById("edate").value;
-			alert(edate)
        });//datepicker end
 
 	});//ready end
 	
+	function searchPeriod(){
+		 var sdate = $("#sdate").val();
+		 var edate = $("#edate").val();
+		 var date = new Date();
+		 var dd = date.getDate();
+		 var mm = date.getMonth()+1; 
+		 var yyyy = date.getFullYear();
+		 if(mm<10){
+				mm = "0"+mm;
+		}
+		if(dd<10){
+			dd = "0"+dd;
+		}
+		 
+		 var today = yyyy+"-"+mm+"-"+dd;
+		 
+		 if(sdate>edate){
+			 alert("시작날짜는 마지막 날짜보다 클 수 없습니다.");
+		 }else if(today<edate || today<sdate){
+			 alert("현재 날짜보다 클 수 없습니다.");
+		 } else{
+			 $.ajax({
+	 			type: "GET", 
+	 			processData: false,
+	 	        contentType: false,
+	 			url: "./Controller.do?command=bookOrderPeriodLoading&sdate="+sdate+"&edate="+edate, 
+	 			dataType: 'json',
+	             success : function(obj) {
+	            	 showinfo(obj); 
+	             },
+	             beforeSend : function(){
+	 				$(".spinner-border").removeClass("displayLoding");
+	 			},
+	 			complete:function(){
+	 				$(".spinner-border").addClass("displayLoding");	
+	 			}
+	         })
+		 }
+	
+	}
 	
 	function getOrderBook(cate){
 		$.ajax({
